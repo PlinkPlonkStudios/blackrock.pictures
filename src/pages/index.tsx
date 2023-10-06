@@ -5,7 +5,7 @@ import { PageTemplate } from "../components/PageTemplate";
 const IndexPage: React.FC<PageProps> = () => {
   return (
     <PageTemplate>
-      <main>ayo</main>
+      <p>ayo</p>
     </PageTemplate>
   );
 };

@@ -102,6 +102,7 @@ const NavItem = styled.li`
 
 export interface NavBarProps {
   className?: string;
+  // TODO implement this
   variant?: "default" | "inverted" | "transparent";
 }
 
