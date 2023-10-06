@@ -1,5 +1,6 @@
 html {
-  --clr-stroke: #000000;
-  --clr-accent: #fefc52;
-  --clr-fill: #ffffff;
+  --clr-stroke-400: #000000;
+  --clr-secondary-400: hsl(239, 43%, 41%);
+  --clr-accent-400: #fefc52;
+  --clr-fill-400: #ffffff;
 }

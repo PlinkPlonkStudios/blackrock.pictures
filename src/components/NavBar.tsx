@@ -9,14 +9,15 @@ const SiteHeader = styled.header`
 
   position: sticky;
 
-  background-color: var(--clr-stroke);
-  color: var(--clr-fill);
+  color: var(--clr-fill-400);
 `;
 
 const Nav = styled.nav`
   display: flex;
   align-items: center;
   padding: 1em clamp(1em, 5vw, 3em);
+
+  background-color: var(--clr-stroke-400);
 
   & > :first-child {
     margin-inline-end: auto;
@@ -79,8 +80,8 @@ const NavList = styled.ul`
     font-size: 2em;
     text-align: center;
 
-    background-color: var(--clr-stroke);
-    color: var(--clr-accent);
+    background-color: var(--clr-stroke-400);
+    color: var(--clr-accent-400);
 
     opacity: 0;
     pointer-events: none;
@@ -99,11 +100,16 @@ const NavItem = styled.li`
   }
 `;
 
-export const NavBar = () => {
+export interface NavBarProps {
+  className?: string;
+  variant?: "default" | "inverted" | "transparent";
+}
+
+export const NavBar = ({ className, variant }: NavBarProps) => {
   const [isNavExpanded, setIsNavExpanded] = useState(false);
 
   return (
-    <SiteHeader>
+    <SiteHeader className={className}>
       <h2 id="primary-nav-label">
         <VisuallyHidden>Main Navigation Menu</VisuallyHidden>
       </h2>

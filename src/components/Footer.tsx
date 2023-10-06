@@ -5,8 +5,11 @@ import yellowAndWhite from "../images/yellow-icon-white-text.png";
 
 const StyledFooter = styled.footer`
   padding: 3em;
-  background-color: var(--clr-stroke);
-  color: var(--clr-fill);
+  background-color: var(--clr-stroke-400);
+  color: var(--clr-fill-400);
+
+  /* TODO this is a little odd. this element is positioning itself?? the audacity! */
+  margin-top: auto;
 `;
 
 const Logo = styled.img`
@@ -18,15 +21,15 @@ const FooterText = styled.p`
 `;
 
 const BrandColor = styled.span`
-  color: var(--clr-accent);
+  color: var(--clr-accent-400);
 `;
 
-export const Footer = () => {
+export const Footer = ({ className }: { className?: string }) => {
   return (
-    <StyledFooter>
+    <StyledFooter className={className}>
       <Logo src={yellowAndWhite} alt="Black Rock Pictures logo" />
       <FooterText>
-        &copy; Copyright PlinkPlonk Studios d.b.a.{" "}
+        &copy; Copyright 2023 PlinkPlonk Studios d.b.a.{" "}
         <BrandColor>Black Rock Pictures.</BrandColor> All Rights reserved.
       </FooterText>
     </StyledFooter>
