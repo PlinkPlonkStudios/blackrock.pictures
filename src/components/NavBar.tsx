@@ -4,20 +4,30 @@ import styled from "styled-components";
 
 import yellowAndWhite from "../images/yellow-icon-white-text.png";
 
+export const navBarHeight = "5rem";
+
 const SiteHeader = styled.header`
+  --navbar-height: ${navBarHeight};
   --logo-height: 3rem;
 
-  position: sticky;
+  position: fixed;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
 
   color: var(--clr-fill-400);
+  background-color: var(--clr-stroke-400);
 `;
 
 const Nav = styled.nav`
+  --padding: calc((var(--navbar-height) - var(--logo-height)) / 2);
   display: flex;
   align-items: center;
-  padding: 1em clamp(1em, 5vw, 3em);
-
-  background-color: var(--clr-stroke-400);
+  padding: var(--padding) clamp(1em, 5vw, 3em);
+  width: 100%;
 
   & > :first-child {
     margin-inline-end: auto;
@@ -25,23 +35,71 @@ const Nav = styled.nav`
 `;
 
 const MobileNavToggle = styled.button`
-  position: absolute;
-  top: 50%;
-  right: 1em;
-  z-index: 100;
-
-  height: var(--logo-height);
   aspect-ratio: 1 / 1;
-  transform: translateY(-50%);
+  padding: 1em;
 
   border-color: transparent;
   border-width: 0px;
   background-color: transparent;
   font-weight: bold;
 
+  cursor: pointer;
+
   @media (min-width: 45rem) {
     display: none;
   }
+`;
+
+const Hamburger = styled.div`
+  position: relative;
+  transition: transform 250ms ease-in-out;
+
+  &,
+  &::before,
+  &::after {
+    background-color: var(--clr-accent-400);
+    width: 1.5em;
+    aspect-ratio: 7 / 1;
+  }
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transition: transform 250ms ease-in-out, opacity 250ms ease-in-out;
+  }
+
+  &::before {
+    transform: translateY(-0.5em);
+  }
+
+  &::after {
+    transform: translateY(0.5em);
+  }
+
+  &[aria-expanded="true"] {
+    transform: rotate(45deg);
+
+    &::before {
+      opacity: 0;
+      transform: translateY(0);
+    }
+
+    &::after {
+      transform: rotate(-90deg);
+    }
+  }
+`;
+
+const VisuallyHiddenH2 = styled.h2`
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 `;
 
 /**
@@ -59,6 +117,7 @@ export const VisuallyHidden = styled.span`
 
 const Logo = styled.img`
   height: var(--logo-height);
+  object-fit: cover;
 `;
 
 const NavList = styled.ul`
@@ -74,14 +133,13 @@ const NavList = styled.ul`
 
     flex-direction: column;
 
-    padding: 3em;
-    inset: 0;
+    padding: 3em 2em;
+    inset: var(--navbar-height) 0 0 0;
 
     font-size: 2em;
     text-align: center;
 
     background-color: var(--clr-stroke-400);
-    color: var(--clr-accent-400);
 
     opacity: 0;
     pointer-events: none;
@@ -94,6 +152,9 @@ const NavList = styled.ul`
 `;
 
 const NavItem = styled.li`
+  text-transform: uppercase;
+  letter-spacing: -0.1ch;
+
   & > a {
     color: inherit;
     text-decoration: none;
@@ -111,9 +172,39 @@ export const NavBar = ({ className, variant }: NavBarProps) => {
 
   return (
     <SiteHeader className={className}>
-      <h2 id="primary-nav-label">
-        <VisuallyHidden>Main Navigation Menu</VisuallyHidden>
-      </h2>
+      <VisuallyHiddenH2 id="primary-nav-label">
+        Main Navigation Menu
+      </VisuallyHiddenH2>
+
+      <Nav id="primary-nav" aria-labelledby="primary-nav-label">
+        <Link to="/">
+          <VisuallyHidden>Home</VisuallyHidden>
+          <Logo src={yellowAndWhite} alt="Black Rock Pictures logo" />
+        </Link>
+
+        <NavList aria-expanded={isNavExpanded}>
+          <NavItem>
+            <Link activeStyle={{ color: "var(--clr-accent-400)" }} to="/">
+              Home
+            </Link>
+          </NavItem>
+
+          <NavItem>
+            <Link activeStyle={{ color: "var(--clr-accent-400)" }} to="/about">
+              About
+            </Link>
+          </NavItem>
+
+          <NavItem>
+            <Link
+              activeStyle={{ color: "var(--clr-accent-400)" }}
+              to="/our-work"
+            >
+              Our Work
+            </Link>
+          </NavItem>
+        </NavList>
+      </Nav>
 
       <MobileNavToggle
         aria-controls="primary-nav"
@@ -125,30 +216,9 @@ export const NavBar = ({ className, variant }: NavBarProps) => {
         style={{ color: "white" }}
       >
         <VisuallyHidden>Menu</VisuallyHidden>
-        <div className="hamburger-icon" />
-        NAV
+
+        <Hamburger aria-expanded={isNavExpanded} />
       </MobileNavToggle>
-
-      <Nav id="primary-nav" aria-labelledby="primary-nav-label">
-        <Link to="/">
-          <VisuallyHidden>Home</VisuallyHidden>
-          <Logo src={yellowAndWhite} alt="Black Rock Pictures logo" />
-        </Link>
-
-        <NavList aria-expanded={isNavExpanded}>
-          <NavItem>
-            <Link to="/">Home</Link>
-          </NavItem>
-
-          <NavItem>
-            <Link to="/about">About</Link>
-          </NavItem>
-
-          <NavItem>
-            <Link to="/our-work">Our Work</Link>
-          </NavItem>
-        </NavList>
-      </Nav>
     </SiteHeader>
   );
 };

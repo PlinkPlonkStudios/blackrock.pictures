@@ -1,5 +1,5 @@
 import React from "react";
-import { NavBar, NavBarProps } from "./NavBar";
+import { NavBar, NavBarProps, navBarHeight } from "./NavBar";
 import { Footer } from "./Footer";
 import "../styles/resets.css";
 import "../styles/colors.css";
@@ -11,11 +11,14 @@ export interface PageTemplateProps {
 }
 
 const MainLayout = styled.div`
+  --gutter-size: minmax(1em, 2vw);
+
   min-height: 100vh;
   min-height: 100dvh;
 
   display: grid;
-  grid-template-columns: minmax(1em, 10vw) 1fr minmax(1em, 10vw);
+  grid-template-columns: var(--gutter-size) 1fr var(--gutter-size);
+  grid-template-rows: min-content 1fr min-content;
 
   & > .nav-bar,
   & > .footer {
@@ -25,6 +28,14 @@ const MainLayout = styled.div`
   & > .main-content {
     grid-column: 2 / -2;
   }
+
+  @media screen and (min-width: 40rem) {
+    --gutter-size: minmax(1em, 15vw);
+  }
+`;
+
+const MainWithSpacingDueToNavBar = styled.main`
+  margin-top: ${navBarHeight};
 `;
 
 export const PageTemplate = ({ children, navBar }: PageTemplateProps) => {
@@ -32,7 +43,9 @@ export const PageTemplate = ({ children, navBar }: PageTemplateProps) => {
     <>
       <MainLayout>
         <NavBar className="nav-bar" />
-        <main className="main-content">{children}</main>
+        <MainWithSpacingDueToNavBar className="main-content">
+          {children}
+        </MainWithSpacingDueToNavBar>
         <Footer className="footer" />
       </MainLayout>
     </>
