@@ -2,20 +2,18 @@ import * as React from "react";
 import { HeadFC, Link, PageProps, navigate } from "gatsby";
 import styled from "styled-components";
 
-import { PageTemplate } from "../components";
+import { Heading, PageTemplate } from "../components";
+
+// TODO refactor these styles
 
 const MainContent = styled.div`
   --link-padding: 0.75em 1.5em;
 
-  padding-block: 6em;
+  padding-block-end: 12em;
 
   & > * + * {
     margin-block-start: 4em;
   }
-`;
-
-const CenteredTitle = styled.h1`
-  text-align: center;
 `;
 
 const SuggestionsSection = styled.div`
@@ -83,11 +81,22 @@ const GoBackButton = styled.a`
   cursor: pointer;
 `;
 
+const Header = styled.header`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-block-start: clamp(2rem, 10vw, 10rem);
+`;
+
 const NotFoundPage: React.FC<PageProps> = () => {
   return (
     <PageTemplate>
       <MainContent>
-        <CenteredTitle>404: Page not found</CenteredTitle>
+        <Header>
+          <Heading>404: Page not found.</Heading>
+
+          <p>Weird.</p>
+        </Header>
 
         <SuggestionsSection>
           <header>

@@ -1,9 +1,11 @@
 import React from "react";
+import styled from "styled-components";
+
 import { NavBar, NavBarProps, navBarHeight } from "./NavBar";
 import { Footer } from "./Footer";
 import "../styles/resets.css";
 import "../styles/colors.css";
-import styled from "styled-components";
+import footerImg from "../images/wide-silhouette-cropped.png";
 
 export interface PageTemplateProps {
   children: React.ReactNode;
@@ -11,31 +13,34 @@ export interface PageTemplateProps {
 }
 
 const MainLayout = styled.div`
-  --gutter-size: minmax(1em, 2vw);
-
   min-height: 100vh;
   min-height: 100dvh;
 
   display: grid;
-  grid-template-columns: var(--gutter-size) 1fr var(--gutter-size);
-  grid-template-rows: min-content 1fr min-content;
+  grid-template-rows: 1fr min-content;
+`;
 
-  & > .nav-bar,
-  & > .footer {
-    grid-column: 1 / -1;
-  }
+const MainWithSpacingDueToNavBarAndDecal = styled.main`
+  position: relative;
+  margin-block-start: ${navBarHeight};
+  /* close enough */
+  padding-block-end: ${navBarHeight};
+  padding-inline: clamp(1em, 5vw, 10%);
+  min-height: 90vh;
+  min-height: 90dvh;
 
-  & > .main-content {
-    grid-column: 2 / -2;
-  }
-
-  @media screen and (min-width: 40rem) {
-    --gutter-size: minmax(1em, 15vw);
+  @media screen and (min-width: 25rem) {
+    padding-inline: clamp(1em, 15vw, 25%);
   }
 `;
 
-const MainWithSpacingDueToNavBar = styled.main`
-  margin-top: ${navBarHeight};
+const FooterImg = styled.img`
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  object-fit: fill;
 `;
 
 export const PageTemplate = ({ children, navBar }: PageTemplateProps) => {
@@ -43,9 +48,13 @@ export const PageTemplate = ({ children, navBar }: PageTemplateProps) => {
     <>
       <MainLayout>
         <NavBar className="nav-bar" />
-        <MainWithSpacingDueToNavBar className="main-content">
+
+        <MainWithSpacingDueToNavBarAndDecal className="main-content">
           {children}
-        </MainWithSpacingDueToNavBar>
+          {/* TODO figure out what i really want to do with this. have it on every page? only hero? etc */}
+          <FooterImg src={footerImg} />
+        </MainWithSpacingDueToNavBarAndDecal>
+
         <Footer className="footer" />
       </MainLayout>
     </>

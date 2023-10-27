@@ -20,6 +20,7 @@ const SiteHeader = styled.header`
 
   color: var(--clr-fill-400);
   background-color: var(--clr-stroke-400);
+  z-index: 999;
 `;
 
 const Nav = styled.nav`
@@ -147,6 +148,7 @@ const NavList = styled.ul`
     &[aria-expanded="true"] {
       opacity: 1;
       pointer-events: initial;
+      z-index: 999;
     }
   }
 `;
