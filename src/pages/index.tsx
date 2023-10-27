@@ -97,6 +97,11 @@ const ContactForm = styled.article`
   color: var(--clr-fill-400);
   border-radius: 2em;
 
+  & a {
+    color: inherit;
+    font-weight: bold;
+  }
+
   & > header {
     display: grid;
     gap: var(--form-gap);
@@ -122,6 +127,10 @@ const ContactForm = styled.article`
     & label {
       display: grid;
       gap: 0.5em;
+
+      & > p {
+        font-weight: bold;
+      }
     }
 
     & input,
@@ -161,7 +170,7 @@ const ContactForm = styled.article`
 
         background-color: var(--clr-accent-400);
         border-color: transparent;
-        border-radius: 1em;
+        /* border-radius: 1em; */
         overflow: none;
       }
     }
@@ -172,22 +181,38 @@ const CF = () => (
   <ContactForm>
     <header>
       <h2>We heard you wanna talk.</h2>
-      <p>Well, we do too. Leave us a message!</p>
+      <p>
+        Well, we do too. Leave us a message, or email us{" "}
+        <a href="mailto:hello@plinkplonkstudios.com">directly</a>!
+      </p>
     </header>
 
     <form>
       <label htmlFor="email">
-        <p>Email</p>
-        <input id="email" type="email" autoComplete="email" />
+        <p>Your Email</p>
+        <input
+          id="email"
+          type="email"
+          autoComplete="email"
+          placeholder="hello@plinkplonkstudios.com"
+        />
       </label>
       <label htmlFor="subject">
         <p>Subject</p>
-        <input id="subject" type="text" />
+        <input
+          id="subject"
+          type="text"
+          placeholder="Chicago Band interested in collaborating on music videos"
+        />
       </label>
 
       <label htmlFor="body">
         <p>Body</p>
-        <textarea id="body" rows={6} />
+        <textarea
+          id="body"
+          rows={6}
+          placeholder="We are PlinkPlonk Studios. We are one."
+        />
       </label>
 
       <footer>
