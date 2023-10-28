@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import type { HeadFC, PageProps } from "gatsby";
 import styled from "styled-components";
 
 import { Heading, PageTemplate } from "../components";
-import ball from "../images/wide-silhouette-circle.png";
+import { wideSilhouetteCircle } from "../images";
 
 const MainContent = styled.div`
   min-height: 120vh;
@@ -27,7 +27,7 @@ const HeroSection = styled.header`
 `;
 
 const HeroImage = styled.div`
-  background-image: url(${ball});
+  background-image: url(${wideSilhouetteCircle});
   background-size: contain;
   position: absolute;
   right: 0;

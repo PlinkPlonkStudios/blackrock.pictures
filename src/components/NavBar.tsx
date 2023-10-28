@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "gatsby";
 import styled from "styled-components";
 
-import yellowAndWhite from "../images/yellow-icon-white-text.png";
+import { yellowIconWhiteText } from "../images";
 
 export const navBarHeight = "5rem";
 
@@ -181,7 +181,7 @@ export const NavBar = ({ className, variant }: NavBarProps) => {
       <Nav id="primary-nav" aria-labelledby="primary-nav-label">
         <Link to="/">
           <VisuallyHidden>Home</VisuallyHidden>
-          <Logo src={yellowAndWhite} alt="Black Rock Pictures logo" />
+          <Logo src={yellowIconWhiteText} alt="Black Rock Pictures logo" />
         </Link>
 
         <NavList aria-expanded={isNavExpanded}>
@@ -192,7 +192,10 @@ export const NavBar = ({ className, variant }: NavBarProps) => {
           </NavItem>
 
           <NavItem>
-            <Link activeStyle={{ color: "var(--clr-accent-400)" }} to="/about">
+            <Link
+              activeStyle={{ color: "var(--clr-accent-400)" }}
+              to="/about-us"
+            >
               About
             </Link>
           </NavItem>

@@ -5,7 +5,7 @@ import { NavBar, NavBarProps, navBarHeight } from "./NavBar";
 import { Footer } from "./Footer";
 import "../styles/resets.css";
 import "../styles/colors.css";
-import footerImg from "../images/wide-silhouette-cropped.png";
+import { wideSilhouetteCropped } from "../images";
 
 export interface PageTemplateProps {
   children: React.ReactNode;
@@ -24,12 +24,12 @@ const MainWithSpacingDueToNavBarAndDecal = styled.main`
   position: relative;
   margin-block-start: ${navBarHeight};
   /* close enough */
-  padding-block-end: ${navBarHeight};
+  padding-block-end: calc(${navBarHeight} * 4);
   padding-inline: clamp(1em, 5vw, 10%);
-  min-height: 90vh;
-  min-height: 90dvh;
+  min-height: 100vh;
+  min-height: 100dvh;
 
-  @media screen and (min-width: 25rem) {
+  @media screen and (min-width: 35rem) {
     padding-inline: clamp(1em, 15vw, 25%);
   }
 `;
@@ -45,18 +45,16 @@ const FooterImg = styled.img`
 
 export const PageTemplate = ({ children, navBar }: PageTemplateProps) => {
   return (
-    <>
-      <MainLayout>
-        <NavBar className="nav-bar" />
+    <MainLayout>
+      <NavBar className="nav-bar" />
 
-        <MainWithSpacingDueToNavBarAndDecal className="main-content">
-          {children}
-          {/* TODO figure out what i really want to do with this. have it on every page? only hero? etc */}
-          <FooterImg src={footerImg} />
-        </MainWithSpacingDueToNavBarAndDecal>
+      <MainWithSpacingDueToNavBarAndDecal className="main-content">
+        {children}
+        {/* TODO figure out what i really want to do with this. have it on every page? only hero? etc */}
+        <FooterImg src={wideSilhouetteCropped} />
+      </MainWithSpacingDueToNavBarAndDecal>
 
-        <Footer className="footer" />
-      </MainLayout>
-    </>
+      <Footer className="footer" />
+    </MainLayout>
   );
 };

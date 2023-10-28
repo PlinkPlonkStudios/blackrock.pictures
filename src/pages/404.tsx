@@ -107,7 +107,7 @@ const NotFoundPage: React.FC<PageProps> = () => {
 
           <LinkSet>
             <MainLink to="/">Home</MainLink>
-            <MainLink to="/about">About</MainLink>
+            <MainLink to="/about-us">About</MainLink>
             <MainLink to="/our-work">Our Work</MainLink>
           </LinkSet>
         </SuggestionsSection>

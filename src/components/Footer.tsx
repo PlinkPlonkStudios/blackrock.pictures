@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import yellowAndWhite from "../images/yellow-icon-white-text.png";
+import { yellowIconWhiteText } from "../images";
 
 const StyledFooter = styled.footer`
   padding: 3em;
@@ -27,7 +27,7 @@ const BrandColor = styled.span`
 export const Footer = ({ className }: { className?: string }) => {
   return (
     <StyledFooter className={className}>
-      <Logo src={yellowAndWhite} alt="Black Rock Pictures logo" />
+      <Logo src={yellowIconWhiteText} alt="Black Rock Pictures logo" />
       <FooterText>
         &copy; Copyright 2023 PlinkPlonk Studios d.b.a.{" "}
         <BrandColor>Black Rock Pictures.</BrandColor> All Rights reserved.
