@@ -56,12 +56,6 @@ const AboutUsPage: React.FC<PageProps> = () => {
           </li>
         ))}
       </CrewList>
-      {/* Each person is an `article` */}
-      {/* has header or h2 or h3 for name */}
-      {/* has img */}
-      {/* has description */}
-      {/* has title/role */}
-      {/* has quote */}
     </PageTemplate>
   );
 };
