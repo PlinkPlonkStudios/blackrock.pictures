@@ -13,6 +13,13 @@ const Section = styled.section`
   & > header {
     margin-block: 3em;
   }
+
+  & > section {
+    display: grid;
+    gap: 1em;
+
+    margin-block: 3em;
+  }
 `;
 
 export const WorkCategory = ({
@@ -36,7 +43,7 @@ export const WorkCategory = ({
       {children}
 
       {/* TODO temporary filler for `children` */}
-      <li>
+      {/* <li>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium
         culpa nemo repellendus placeat sequi voluptatem veniam unde soluta
         veritatis exercitationem iusto, vero nulla non dolorum libero iure est
@@ -59,7 +66,7 @@ export const WorkCategory = ({
         ducimus sed provident dolores magnam nihil cumque amet, mollitia
         cupiditate vitae ratione! Consequuntur ad blanditiis impedit asperiores
         reprehenderit ab omnis, obcaecati porro dolores?
-      </li>
+      </li> */}
     </Section>
   );
 };
