@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export interface WorkCategoryProps {
   title: string;
-  description?: string;
+  description?: React.ReactNode;
 }
 
 const Section = styled.section`
@@ -32,12 +32,13 @@ export const WorkCategory = ({
       <header>
         <h2>{title}</h2>
         {/* TODO temporary filler for `description` */}
-        <p>
-          {description}
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, dolore
-          quibusdam eligendi ut perferendis quidem eum assumenda illo veniam
-          voluptates.
-        </p>
+        {description || (
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, dolore
+            quibusdam eligendi ut perferendis quidem eum assumenda illo veniam
+            voluptates.
+          </p>
+        )}
       </header>
 
       {children}
