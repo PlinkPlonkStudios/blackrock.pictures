@@ -13,6 +13,7 @@
     "start": "gatsby develop",
     "build": "gatsby build",
     "deploy": "aws s3 sync public/ s3://shmois.com",
+    "cicd": "npm run build && npm run deploy",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "typecheck": "tsc --noEmit"
