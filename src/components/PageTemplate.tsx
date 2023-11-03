@@ -18,6 +18,8 @@ const MainLayout = styled.div`
 
   display: grid;
   grid-template-rows: 1fr min-content;
+
+  overflow-x: hidden;
 `;
 
 const MainWithSpacingDueToNavBarAndDecal = styled.main`
