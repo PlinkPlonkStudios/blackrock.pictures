@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
 import styled from "styled-components";
 
 const PurpleCard = styled.article`
@@ -10,7 +10,7 @@ const PurpleCard = styled.article`
   width: min(100%, 40rem);
 
   margin-block: 30em;
-  padding: 3em;
+  padding: 3em clamp(1em, 5vw, 3em);
 
   background-color: var(--clr-secondary-400);
   color: var(--clr-fill-400);
@@ -21,122 +21,127 @@ const PurpleCard = styled.article`
     font-weight: bold;
   }
 
-  & > header {
-    display: grid;
-    gap: var(--form-gap);
-
-    & > h2 {
-      font-weight: bold;
-    }
+  & > h2 {
+    font-weight: bold;
+    font-size: clamp(2rem, 5vw, 3rem);
+    text-align: center;
   }
 
   & > form {
     display: grid;
-    justify-items: stretch;
     gap: 1em;
+    grid-template-columns: 1fr;
 
-    & input[type="email"] {
-      width: 50%;
+    @media screen and (max-width: 40em) {
+      justify-items: center;
 
-      @media screen and (max-width: 50rem) {
+      label {
         width: 100%;
       }
     }
+  }
 
-    & label {
-      display: grid;
-      gap: 0.5em;
+  & input,
+  & textarea {
+    width: 100%;
+    padding: 0.75em;
+  }
 
-      & > p {
-        font-weight: bold;
-      }
-    }
+  & input[type="checkbox"] {
+    width: unset;
+    margin: 1em;
+  }
 
-    & input,
-    & textarea {
-      padding: 0.5em;
-    }
+  & button[type="submit"] {
+    border-color: transparent;
+    background-color: var(--clr-accent-400);
+    color: var(--clr-stroke-400);
 
-    & input[type="text"],
-    & textarea {
-      width: 100%;
-    }
+    font-size: 2em;
+    padding: 0.5em 1.5em;
+    text-transform: uppercase;
 
-    & textarea {
-      resize: vertical;
-      padding-block: 1em;
-    }
+    transition: color 250ms ease-in-out, background-color 250ms ease-in-out;
 
-    & > footer {
-      display: flex;
-      width: 100%;
-      gap: 1em;
-
-      justify-content: stretch;
-      align-items: stretch;
-
-      & > button {
-        position: relative;
-        isolation: isolate;
-
-        flex: 1;
-        padding: 1rem 2em;
-        margin-top: 0.5em;
-
-        font-weight: bold;
-        text-transform: uppercase;
-        font-size: 2rem;
-
-        background-color: var(--clr-accent-400);
-        border-color: transparent;
-        /* border-radius: 1em; */
-        overflow: none;
-      }
+    &[disabled] {
+      background-color: var(--clr-fill-400);
+      color: hsla(var(--clr-secondary-400-hsl), 20%);
     }
   }
 `;
 
-export const ContactForm = () => (
-  <PurpleCard>
-    <header>
-      <h2>We heard you wanna talk.</h2>
-      <p>
-        Well, we do too. Leave us a message, or email us{" "}
-        <a href="mailto:hello@plinkplonkstudios.com">directly</a>!
-      </p>
-    </header>
+const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-    <form>
-      <label htmlFor="email">
-        <p>Your Email</p>
-        <input
-          id="email"
-          type="email"
-          autoComplete="email"
-          placeholder="hello@plinkplonkstudios.com"
-        />
-      </label>
-      <label htmlFor="subject">
-        <p>Subject</p>
-        <input
-          id="subject"
-          type="text"
-          placeholder="Chicago Band interested in collaborating on music videos"
-        />
-      </label>
+const isValidEmail = (email: string) => {
+  return emailRegex.test(email);
+};
 
-      <label htmlFor="body">
-        <p>Body</p>
-        <textarea
-          id="body"
-          rows={6}
-          placeholder="We are PlinkPlonk Studios. We are one."
-        />
-      </label>
+export const ContactForm = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [body, setBody] = useState("");
+  const [newsletter, setNewsletter] = useState(true);
 
-      <footer>
-        <button type="submit">Send</button>
-      </footer>
-    </form>
-  </PurpleCard>
-);
+  const readyToSubmit = useMemo(
+    () => name.length > 0 && isValidEmail(email) && body.length > 0,
+    [name, email, body]
+  );
+
+  return (
+    <PurpleCard>
+      <h2>Let's make something.</h2>
+
+      <form>
+        <label htmlFor="name">
+          <p>Your Name</p>
+          <input
+            id="name"
+            type="text"
+            autoComplete="name"
+            placeholder="Jane Doe"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </label>
+        <label htmlFor="email">
+          <p>Your Email</p>
+          <input
+            id="subject"
+            type="email"
+            autoComplete="email"
+            placeholder="hello@plinkplonkstudios.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </label>
+
+        <label htmlFor="body">
+          <p>Body</p>
+          <textarea
+            id="body"
+            rows={6}
+            placeholder="We are PlinkPlonk Studios. We are one."
+            value={body}
+            onChange={(e) => setBody(e.target.value)}
+          />
+        </label>
+
+        <label htmlFor="newsletter">
+          <input
+            type="checkbox"
+            id="newsletter"
+            checked={newsletter}
+            onChange={() => setNewsletter((prev) => !prev)}
+          />
+          Sign up for our newsletter
+        </label>
+
+        <footer>
+          <button type="submit" disabled={!readyToSubmit}>
+            Boom baby
+          </button>
+        </footer>
+      </form>
+    </PurpleCard>
+  );
+};
