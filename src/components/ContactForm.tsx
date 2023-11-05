@@ -177,11 +177,18 @@ export const ContactForm = () => {
     <PurpleCard>
       <h2>Let's make something.</h2>
 
-      <form>
+      <form action="https://api.web3forms.com/submit" method="POST">
+        <input
+          type="hidden"
+          name="access_key"
+          value="00005c50-546d-4cc5-856c-885884789a36"
+        />
+
         <label htmlFor="name">
           <p>Your Name</p>
           <input
             id="name"
+            name="name"
             type="text"
             autoComplete="name"
             placeholder="Jane Doe"
@@ -193,6 +200,7 @@ export const ContactForm = () => {
           <p>Your Email</p>
           <input
             id="subject"
+            name="email"
             type="email"
             autoComplete="email"
             placeholder="hello@plinkplonkstudios.com"
@@ -205,6 +213,7 @@ export const ContactForm = () => {
           <p>Your Story</p>
           <textarea
             id="body"
+            name="body"
             rows={6}
             placeholder="We are PlinkPlonk Studios. We are one."
             value={body}
@@ -215,6 +224,7 @@ export const ContactForm = () => {
         <label htmlFor="newsletter">
           <input
             type="checkbox"
+            name="newsletter"
             id="newsletter"
             checked={newsletter}
             onChange={() => setNewsletter((prev) => !prev)}
@@ -223,6 +233,7 @@ export const ContactForm = () => {
         </label>
 
         <footer>
+          {/* TODO custom redirect */}
           <SubmitButton type="submit" disabled={!readyToSubmit}>
             Send it
           </SubmitButton>
