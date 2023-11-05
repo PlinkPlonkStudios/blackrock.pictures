@@ -45,27 +45,113 @@ const PurpleCard = styled.article`
   & textarea {
     width: 100%;
     padding: 0.75em;
+    border-radius: 0.5em;
+    border-style: none;
   }
 
   & input[type="checkbox"] {
     width: unset;
     margin: 1em;
   }
+`;
 
-  & button[type="submit"] {
-    border-color: transparent;
-    background-color: var(--clr-accent-400);
-    color: var(--clr-stroke-400);
+const SubmitButton = styled.button`
+  position: relative;
+  isolation: isolate;
 
-    font-size: 2em;
-    padding: 0.5em 1.5em;
-    text-transform: uppercase;
+  font-size: 2rem;
+  padding: 0.5em 1.5em;
+  text-transform: uppercase;
 
-    transition: color 250ms ease-in-out, background-color 250ms ease-in-out;
+  border-style: solid;
+  border-radius: 1rem;
 
-    &[disabled] {
-      background-color: var(--clr-fill-400);
-      color: hsla(var(--clr-secondary-400-hsl), 20%);
+  cursor: pointer;
+
+  color: var(--clr-secondary-400);
+  background-color: var(--clr-accent-400);
+  border-color: transparent;
+
+  transition: color 250ms ease-in-out, background-color 250ms ease-in-out,
+    border-color 250ms ease-in-out, scale 100ms ease-in-out;
+
+  &[disabled] {
+    color: hsla(var(--clr-fill-hsl), 20%);
+    background-color: var(--clr-secondary-400);
+    border-color: hsla(var(--clr-fill-hsl), 20%);
+
+    cursor: not-allowed;
+    pointer-events: visible;
+
+    &:hover {
+      /* ignore scale-up from below */
+      scale: 1;
+    }
+
+    &::after {
+      transform: var(--transform-hide);
+      opacity: 0;
+    }
+  }
+
+  &:hover,
+  &:focus-visible {
+    scale: 1.05;
+  }
+
+  &:hover {
+    &::after {
+      transform: var(--transform-hide);
+      opacity: 0;
+    }
+  }
+
+  @keyframes point {
+    from {
+      translate: -0.25em;
+    }
+
+    to {
+      translate: 0.25em;
+    }
+  }
+
+  &::after {
+    --width: 3em;
+    --transform-y-align: translateY(-50%);
+    --transform-hide: translateX(-200%) var(--transform-y-align);
+
+    content: "";
+    position: absolute;
+
+    top: 50%;
+    transform: var(--transform-y-align);
+    right: calc(-1 * var(--width) - 1em);
+    z-index: -1;
+
+    transition: transform 250ms ease-in-out, opacity 250ms ease-in-out;
+    animation-name: point;
+    animation-duration: 1s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+
+    width: var(--width);
+    aspect-ratio: 16 / 9;
+
+    background: var(--clr-fill-400);
+    clip-path: polygon(
+      40% 0%,
+      40% 20%,
+      100% 20%,
+      100% 80%,
+      40% 80%,
+      40% 100%,
+      0% 50%
+    );
+
+    @media screen and (max-width: 40rem) {
+      display: none;
     }
   }
 `;
@@ -116,7 +202,7 @@ export const ContactForm = () => {
         </label>
 
         <label htmlFor="body">
-          <p>Body</p>
+          <p>Your Story</p>
           <textarea
             id="body"
             rows={6}
@@ -137,9 +223,9 @@ export const ContactForm = () => {
         </label>
 
         <footer>
-          <button type="submit" disabled={!readyToSubmit}>
-            Boom baby
-          </button>
+          <SubmitButton type="submit" disabled={!readyToSubmit}>
+            Send it
+          </SubmitButton>
         </footer>
       </form>
     </PurpleCard>
