@@ -75,7 +75,7 @@ const CTA = styled.a`
   box-shadow: 0px 0px 2em 2em var(--hidden-color);
 
   color: var(--clr-fill-400);
-  transition: background-color 250ms ease-in-out;
+  transition: background-color 150ms ease-out;
 
   &:hover,
   &:focus {
@@ -95,7 +95,7 @@ const CTA = styled.a`
   &::after {
     content: "";
     position: absolute;
-    transition: transform 250ms ease-in-out, opacity 200ms ease-in-out;
+    transition: transform 150ms ease-out, opacity 100ms ease-out;
   }
 
   &::before {
