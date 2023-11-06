@@ -35,6 +35,7 @@ const HeroSection = styled.header`
 
 const StyledHeading = styled(Heading)`
   color: var(--clr-fill-400);
+  text-wrap: balance;
 
   z-index: 100;
   mix-blend-mode: lighten;
@@ -72,13 +73,15 @@ const IndexPage: React.FC<PageProps> = () => {
   return (
     <PageTemplate>
       <MainContent>
-        {/* TODO decent hero section */}
         <ReelHero />
 
+        {/* TODO split this out into its own component */}
         <HeroSection>
           <StyledHeading>
-            Creating art that tells <Highlight>stories.</Highlight>
+            We create art that tells <Highlight>stories.</Highlight>
           </StyledHeading>
+
+          {/* TODO make this more subtle on first glance, then more apparent on focus/hover */}
           <CTA href="#contact">My turn</CTA>
         </HeroSection>
 

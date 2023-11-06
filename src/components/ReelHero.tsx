@@ -43,7 +43,7 @@ export const ReelHero = () => {
   return (
     <VideoContainer>
       <Shadow />
-      <Video autoPlay loop muted>
+      <Video autoPlay loop muted playsInline>
         <source src={reelPlaceholder} type="video/mp4" />
       </Video>
     </VideoContainer>
