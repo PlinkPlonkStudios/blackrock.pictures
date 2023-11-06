@@ -38,7 +38,6 @@ const StyledHeading = styled(Heading)`
   text-wrap: balance;
 
   z-index: 100;
-  mix-blend-mode: lighten;
 `;
 
 const Highlight = styled.span`
@@ -55,18 +54,68 @@ const ContactSection = styled.section`
 `;
 
 const CTA = styled.a`
+  --padding-x: 1.5em;
+  --hidden-color: hsla(0, 0%, 0%, 20%);
+  --visible-color-hsl: var(--clr-secondary-400-hsl);
+
+  position: relative;
+
   display: inline-block;
 
-  padding: 0.5em 1.5em;
+  padding: 0.5em var(--padding-x);
   width: max-content;
 
   font-size: clamp(1rem, 5vw, 2rem);
-  color: var(--clr-fill-400);
-  background-color: var(--clr-secondary-400);
   text-decoration: none;
   text-transform: uppercase;
   font-weight: bold;
   border-radius: 1em;
+
+  background-color: var(--hidden-color);
+  box-shadow: 0px 0px 2em 2em var(--hidden-color);
+
+  color: var(--clr-fill-400);
+  transition: background-color 250ms ease-in-out;
+
+  &:hover,
+  &:focus {
+    background-color: hsl(var(--visible-color-hsl));
+
+    &::before {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+
+    &::after {
+      opacity: 1;
+    }
+  }
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    transition: transform 250ms ease-in-out, opacity 200ms ease-in-out;
+  }
+
+  &::before {
+    bottom: 0.5ch;
+    width: calc(100% - 2 * var(--padding-x));
+    left: var(--padding-x);
+    height: 0.25ch;
+    background: white;
+
+    opacity: 1;
+  }
+
+  &::after {
+    inset: 0;
+    box-shadow: 0px 0px 1em 1em hsla(var(--visible-color-hsl), 30%);
+    border-radius: inherit;
+    z-index: 99;
+
+    opacity: 0;
+  }
 `;
 
 const IndexPage: React.FC<PageProps> = () => {
