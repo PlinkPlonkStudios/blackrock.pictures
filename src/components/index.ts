@@ -5,4 +5,5 @@ export * from "./Footer";
 export * from "./Heading";
 export * from "./NavBar";
 export * from "./PageTemplate";
+export * from "./ReelHero";
 // @endindex

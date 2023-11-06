@@ -9,7 +9,6 @@ const PurpleCard = styled.article`
 
   width: min(100%, 40rem);
 
-  margin-block: 30em;
   padding: 3em clamp(1em, 5vw, 3em);
 
   background-color: var(--clr-secondary-400);
