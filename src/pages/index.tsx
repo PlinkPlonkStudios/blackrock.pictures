@@ -48,9 +48,14 @@ const ContactSection = styled.section`
   display: grid;
   justify-items: center;
   align-items: center;
+  gap: 2em;
 
   margin-block: 24em;
   padding-block: 6em;
+
+  @media screen and (min-width: 60rem) {
+    grid-template-columns: 1fr 2fr;
+  }
 `;
 
 const CTA = styled.a`
@@ -99,10 +104,10 @@ const CTA = styled.a`
   }
 
   &::before {
-    bottom: 0.5ch;
+    bottom: 1ch;
     width: calc(100% - 2 * var(--padding-x));
     left: var(--padding-x);
-    height: 0.25ch;
+    height: 0.125ch;
     background: white;
 
     opacity: 1;
@@ -118,26 +123,61 @@ const CTA = styled.a`
   }
 `;
 
+const ContactCopy = styled.aside`
+  & > p {
+    margin-block-end: 2em;
+  }
+`;
+
 const IndexPage: React.FC<PageProps> = () => {
   return (
     <PageTemplate>
       <MainContent>
         <ReelHero />
 
-        {/* TODO split this out into its own component */}
+        {/* TODO split this out into its own component? */}
         <HeroSection>
           <StyledHeading>
             We create art that tells <Highlight>stories.</Highlight>
           </StyledHeading>
 
-          {/* TODO make this more subtle on first glance, then more apparent on focus/hover */}
           <CTA href="#contact">My turn</CTA>
         </HeroSection>
 
         {/* TODO testimonials / brands section */}
 
         <ContactSection id="contact">
-          {/* TODO testimonial copy */}
+          <ContactCopy>
+            <h3>Connect with Us for Your Film</h3>
+            <p>
+              We at Black Rock Pictures are more than just a film production
+              company; we're your creative partners in storytelling. Whether
+              you're a seasoned filmmaker or just starting, our doors are open
+              to collaborate and turn your cinematic dreams into reality. Our
+              mission is to create memorable stories that resonate with
+              audiences worldwide.
+            </p>
+
+            <h3>How to Get in Touch</h3>
+            <p>
+              Have a project in mind or want to discuss potential
+              collaborations? The first step is reaching out to us. Use the
+              contact form here to send us a message. We're eager to hear your
+              ideas, answer your questions, or provide you with more information
+              about our services. Feel free to let us know what you have in
+              mind, and we'll get back to you promptly.
+            </p>
+
+            <h3>Your Journey Starts Here</h3>
+            <p>
+              Your next film adventure begins with a simple message. Whether
+              it's a script you want to discuss, a project proposal, or you're
+              seeking advice on your filmmaking career, we're here to help.
+              We're excited to embark on this creative journey with you. Let's
+              create exceptional cinematic experiences &mdash; together.
+            </p>
+          </ContactCopy>
+
           <ContactForm />
         </ContactSection>
       </MainContent>
