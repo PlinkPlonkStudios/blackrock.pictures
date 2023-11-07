@@ -233,6 +233,7 @@ export const ContactForm = () => {
 
         <footer>
           {/* TODO custom redirect */}
+          {/* TODO no pointer events on the arrow */}
           <SubmitButton type="submit" disabled={!readyToSubmit}>
             Send it
           </SubmitButton>

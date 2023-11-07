@@ -13,6 +13,7 @@
     "start": "gatsby develop",
     "build": "gatsby build",
     "deploy": "aws s3 sync public/ s3://shmois.com",
+    "clear-cache": "aws cloudfront create-invalidation --distribution-id E345M9ZTPSB7NG --paths \"/*\" && printf \"\nTODO: move Distribution ID to .env file\n\n\"",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "typecheck": "tsc --noEmit",

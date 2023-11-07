@@ -169,6 +169,8 @@ export interface NavBarProps {
   variant?: "default" | "inverted" | "transparent";
 }
 
+// TODO implement transparent-at-top variant
+// TODO ^ requires PageTemplate to have no-top-padding option
 export const NavBar = ({ className, variant }: NavBarProps) => {
   const [isNavExpanded, setIsNavExpanded] = useState(false);
 

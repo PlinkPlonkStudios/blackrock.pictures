@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-# TODO invalidate CloudFront cache
-npm run build && npm run deploy
+npm run build && npm run deploy && npm run clear-cache
