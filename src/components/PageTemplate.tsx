@@ -53,7 +53,7 @@ export const PageTemplate = ({ children, navBar }: PageTemplateProps) => {
       <MainWithSpacingDueToNavBarAndDecal className="main-content">
         {children}
         {/* TODO figure out what i really want to do with this. have it on every page? only hero? etc */}
-        {/* TODO move this out of `main` because it's not main */}
+        {/* TODO move this out of `main` because it's not main. Maybe as part of Footer? Would help with spacing silliness */}
         <FooterImg src={wideSilhouetteCropped} />
       </MainWithSpacingDueToNavBarAndDecal>
 

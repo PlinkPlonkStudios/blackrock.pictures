@@ -149,6 +149,8 @@ const SubmitButton = styled.button`
       0% 50%
     );
 
+    pointer-events: none;
+
     @media screen and (max-width: 40rem) {
       display: none;
     }
