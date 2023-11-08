@@ -163,6 +163,7 @@ const NavList = styled.ul`
   }
 `;
 
+// TODO fun hover animation
 const NavItem = styled.li`
   text-transform: uppercase;
   letter-spacing: -0.1ch;

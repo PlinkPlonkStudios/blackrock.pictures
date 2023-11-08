@@ -136,15 +136,20 @@ const IndexPage: React.FC<PageProps> = () => {
 
   useEffect(() => {
     const oldOnScroll = window.onscroll;
-    window.onscroll = () => {
+    function onScroll() {
       if (window.scrollY > 0) setNavBarVariant("default");
       else setNavBarVariant("transparent");
-    };
+    }
+
+    // In case we start low on the screen
+    onScroll();
+
+    window.onscroll = onScroll;
 
     return () => {
       window.onscroll = oldOnScroll;
     };
-  }, [window.scrollY]);
+  }, []);
 
   return (
     <PageTemplate pushToTop navBar={{ variant: navBarVariant }}>
