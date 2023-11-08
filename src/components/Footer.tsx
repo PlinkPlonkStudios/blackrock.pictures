@@ -1,15 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 
-import { yellowIconWhiteText } from "../images";
+import { wideSilhouetteCropped, yellowIconWhiteText } from "../images";
 
-const StyledFooter = styled.footer`
+const Wrapper = styled.footer``;
+
+const StyledFooter = styled.div`
   padding: 3em;
   background-color: var(--clr-stroke-400);
   color: var(--clr-fill-400);
-
-  /* TODO this is a little odd. this element is positioning itself?? the audacity! */
-  margin-top: auto;
 `;
 
 const Logo = styled.img`
@@ -24,14 +23,22 @@ const BrandColor = styled.span`
   color: var(--clr-accent-400);
 `;
 
+const FooterImg = styled.img`
+  object-fit: fill;
+`;
+
 export const Footer = ({ className }: { className?: string }) => {
   return (
-    <StyledFooter className={className}>
-      <Logo src={yellowIconWhiteText} alt="Black Rock Pictures logo" />
-      <FooterText>
-        &copy; Copyright 2023 PlinkPlonk Studios d.b.a.{" "}
-        <BrandColor>Black Rock Pictures.</BrandColor> All Rights reserved.
-      </FooterText>
-    </StyledFooter>
+    <Wrapper>
+      <FooterImg src={wideSilhouetteCropped} />
+
+      <StyledFooter className={className}>
+        <Logo src={yellowIconWhiteText} alt="Black Rock Pictures logo" />
+        <FooterText>
+          &copy; Copyright 2023 PlinkPlonk Studios d.b.a.{" "}
+          <BrandColor>Black Rock Pictures.</BrandColor> All Rights reserved.
+        </FooterText>
+      </StyledFooter>
+    </Wrapper>
   );
 };
