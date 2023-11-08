@@ -18,9 +18,19 @@ const SiteHeader = styled.header`
 
   width: 100%;
 
-  color: var(--clr-fill-400);
-  background-color: var(--clr-stroke-400);
   z-index: 999;
+
+  color: var(--clr-fill-400);
+
+  transition: background-color 250ms ease-in-out;
+
+  &.default {
+    background-color: var(--clr-stroke-400);
+  }
+
+  &.transparent {
+    background-color: transparent;
+  }
 `;
 
 const Nav = styled.nav`
@@ -165,17 +175,14 @@ const NavItem = styled.li`
 
 export interface NavBarProps {
   className?: string;
-  // TODO implement this
-  variant?: "default" | "inverted" | "transparent";
+  variant?: "default" | "transparent";
 }
 
-// TODO implement transparent-at-top variant
-// TODO ^ requires PageTemplate to have no-top-padding option
-export const NavBar = ({ className, variant }: NavBarProps) => {
+export const NavBar = ({ className, variant = "default" }: NavBarProps) => {
   const [isNavExpanded, setIsNavExpanded] = useState(false);
 
   return (
-    <SiteHeader className={className}>
+    <SiteHeader className={`${className} ${variant}`}>
       <VisuallyHiddenH2 id="primary-nav-label">
         Main Navigation Menu
       </VisuallyHiddenH2>

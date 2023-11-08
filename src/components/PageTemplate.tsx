@@ -5,11 +5,11 @@ import { NavBar, NavBarProps, navBarHeight } from "./NavBar";
 import { Footer } from "./Footer";
 import "../styles/resets.css";
 import "../styles/colors.css";
-import { wideSilhouetteCropped } from "../images";
 
 export interface PageTemplateProps {
   children: React.ReactNode;
   navBar?: NavBarProps;
+  pushToTop?: boolean;
 }
 
 const MainLayout = styled.div`
@@ -36,14 +36,24 @@ const MainWithSpacingDueToNavBarAndDecal = styled.main`
   @media screen and (min-width: 35rem) {
     padding-inline: clamp(1em, 15vw, 25%);
   }
+
+  &.push-to-top {
+    margin-block-start: 0;
+  }
 `;
 
-export const PageTemplate = ({ children, navBar }: PageTemplateProps) => {
+export const PageTemplate = ({
+  children,
+  navBar,
+  pushToTop,
+}: PageTemplateProps) => {
   return (
     <MainLayout>
-      <NavBar className="nav-bar" />
+      <NavBar className="nav-bar" {...navBar} />
 
-      <MainWithSpacingDueToNavBarAndDecal className="main-content">
+      <MainWithSpacingDueToNavBarAndDecal
+        className={pushToTop ? "push-to-top" : undefined}
+      >
         {children}
       </MainWithSpacingDueToNavBarAndDecal>
 

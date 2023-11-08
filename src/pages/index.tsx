@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import type { HeadFC, PageProps } from "gatsby";
 import styled from "styled-components";
 
@@ -130,8 +130,24 @@ const ContactCopy = styled.aside`
 `;
 
 const IndexPage: React.FC<PageProps> = () => {
+  const [navBarVariant, setNavBarVariant] = useState<"default" | "transparent">(
+    "transparent"
+  );
+
+  useEffect(() => {
+    const oldOnScroll = window.onscroll;
+    window.onscroll = () => {
+      if (window.scrollY > 0) setNavBarVariant("default");
+      else setNavBarVariant("transparent");
+    };
+
+    return () => {
+      window.onscroll = oldOnScroll;
+    };
+  }, [window.scrollY]);
+
   return (
-    <PageTemplate>
+    <PageTemplate pushToTop navBar={{ variant: navBarVariant }}>
       <MainContent>
         <ReelHero />
 
