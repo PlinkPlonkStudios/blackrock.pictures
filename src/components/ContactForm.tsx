@@ -233,9 +233,13 @@ export const ContactForm = () => {
           Sign up for our newsletter
         </label>
 
+        <input
+          type="hidden"
+          name="redirect"
+          value="https://shmois.com/thanks"
+        />
+
         <footer>
-          {/* TODO custom redirect */}
-          {/* TODO no pointer events on the arrow */}
           <SubmitButton type="submit" disabled={!readyToSubmit}>
             Send it
           </SubmitButton>

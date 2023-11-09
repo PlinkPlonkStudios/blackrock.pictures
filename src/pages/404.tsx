@@ -88,6 +88,7 @@ const Header = styled.header`
   padding-block-start: clamp(2rem, 10vw, 10rem);
 `;
 
+// TODO get this to work on AWS with S3 static hosting
 const NotFoundPage: React.FC<PageProps> = () => {
   return (
     <PageTemplate>
