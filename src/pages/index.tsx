@@ -7,6 +7,8 @@ import { ContactForm, Heading, PageTemplate, ReelHero } from "../components";
 const MainContent = styled.div`
   min-height: 120vh;
   min-height: 120dvh;
+
+  padding-block-start: 6em;
 `;
 
 const HeroSection = styled.header`
