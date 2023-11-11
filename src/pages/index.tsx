@@ -9,6 +9,45 @@ const MainContent = styled.div`
   min-height: 120dvh;
 
   padding-block-start: 6em;
+
+  & .subtle-button {
+    --hidden-color: hsla(0, 0%, 0%, 20%);
+    --visible-color-hsl: var(--clr-secondary-400-hsl);
+
+    color: var(--clr-fill-400);
+    border-color: transparent;
+    border-radius: 1em;
+    box-shadow: 0px 0px 2em 2em var(--hidden-color);
+    cursor: pointer;
+
+    background-color: var(--hidden-color);
+
+    transition: background-color 150ms ease-out;
+
+    &:hover,
+    &:focus {
+      background-color: hsl(var(--visible-color-hsl));
+
+      &::after {
+        opacity: 1;
+      }
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      transition: transform 150ms ease-out, opacity 100ms ease-out;
+    }
+
+    &::after {
+      inset: 0;
+      box-shadow: 0px 0px 1em 1em hsla(var(--visible-color-hsl), 30%);
+      border-radius: inherit;
+      z-index: 99;
+
+      opacity: 0;
+    }
+  }
 `;
 
 const HeroSection = styled.header`
@@ -62,8 +101,6 @@ const ContactSection = styled.section`
 
 const CTA = styled.a`
   --padding-x: 1.5em;
-  --hidden-color: hsla(0, 0%, 0%, 20%);
-  --visible-color-hsl: var(--clr-secondary-400-hsl);
 
   position: relative;
 
@@ -76,31 +113,18 @@ const CTA = styled.a`
   text-decoration: none;
   text-transform: uppercase;
   font-weight: bold;
-  border-radius: 1em;
 
-  background-color: var(--hidden-color);
-  box-shadow: 0px 0px 2em 2em var(--hidden-color);
   transform: translateX(calc(-0.5 * var(--padding-x)));
-
-  color: var(--clr-fill-400);
-  transition: background-color 150ms ease-out;
 
   &:hover,
   &:focus {
-    background-color: hsl(var(--visible-color-hsl));
-
     &::before {
       transform: translateY(-100%);
       opacity: 0;
     }
-
-    &::after {
-      opacity: 1;
-    }
   }
 
-  &::before,
-  &::after {
+  &::before {
     content: "";
     position: absolute;
     transition: transform 150ms ease-out, opacity 100ms ease-out;
@@ -115,15 +139,6 @@ const CTA = styled.a`
 
     opacity: 1;
   }
-
-  &::after {
-    inset: 0;
-    box-shadow: 0px 0px 1em 1em hsla(var(--visible-color-hsl), 30%);
-    border-radius: inherit;
-    z-index: 99;
-
-    opacity: 0;
-  }
 `;
 
 const ContactCopy = styled.aside`
@@ -132,10 +147,26 @@ const ContactCopy = styled.aside`
   }
 `;
 
+const DownArrow = styled.button`
+  position: absolute;
+
+  padding: 1em;
+  right: 0;
+  bottom: 6em;
+`;
+
 const IndexPage: React.FC<PageProps> = () => {
   const [navBarVariant, setNavBarVariant] = useState<"default" | "transparent">(
     "transparent"
   );
+
+  const scrollDown = () => {
+    document.getElementById("after-hero")?.scrollIntoView({
+      block: "start",
+      inline: "nearest",
+      behavior: "smooth",
+    });
+  };
 
   useEffect(() => {
     const oldOnScroll = window.onscroll;
@@ -165,8 +196,16 @@ const IndexPage: React.FC<PageProps> = () => {
             We create art that tells <Highlight>stories.</Highlight>
           </StyledHeading>
 
-          <CTA href="#contact">My turn</CTA>
+          <CTA className="subtle-button" href="#contact">
+            My turn
+          </CTA>
+
+          <DownArrow className="subtle-button" onClick={scrollDown}>
+            <i className="fa-solid fa-arrow-down" />
+          </DownArrow>
         </HeroSection>
+
+        <div className="sr-only" id="after-hero" />
 
         {/* TODO testimonials / brands section */}
 
@@ -211,4 +250,12 @@ const IndexPage: React.FC<PageProps> = () => {
 
 export default IndexPage;
 
-export const Head: HeadFC = () => <title>black rock pictures.</title>;
+export const Head: HeadFC = () => (
+  <>
+    <title>black rock pictures.</title>
+    <script
+      src="https://kit.fontawesome.com/6ab573e32e.js"
+      crossOrigin="anonymous"
+    />
+  </>
+);
