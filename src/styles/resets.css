@@ -37,13 +37,25 @@ body {
 /*
   6. Improve media defaults
 */
-img,
 picture,
 video,
 canvas,
 svg {
   display: block;
   max-width: 100%;
+}
+
+/* 
+  6.5. Improve img defaults
+ */
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+  font-style: italic;
+  background-repeat: no-repeat;
+  background-size: cover;
+  shape-margin: 2rem;
 }
 
 /*

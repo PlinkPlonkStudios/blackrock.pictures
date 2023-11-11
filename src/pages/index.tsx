@@ -80,6 +80,7 @@ const CTA = styled.a`
 
   background-color: var(--hidden-color);
   box-shadow: 0px 0px 2em 2em var(--hidden-color);
+  transform: translateX(calc(-0.5 * var(--padding-x)));
 
   color: var(--clr-fill-400);
   transition: background-color 150ms ease-out;
