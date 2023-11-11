@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "gatsby";
 import styled from "styled-components";
 
-import { yellowIconWhiteText } from "../images";
+import { instagramLogo, yellowIconWhiteText, youtubeLogo } from "../images";
 
 export const navBarHeight = "5rem";
 
@@ -133,11 +133,22 @@ const Logo = styled.img`
 
 const NavList = styled.ul`
   display: flex;
+  align-items: center;
   gap: 1em;
 
   list-style-type: none;
 
   transition: opacity 250ms ease;
+
+  & > .socials {
+    display: inherit;
+    align-items: inherit;
+    gap: inherit;
+  }
+
+  & > .space-before {
+    margin-inline-start: 3em;
+  }
 
   @media (max-width: 45rem) {
     position: fixed;
@@ -154,6 +165,11 @@ const NavList = styled.ul`
 
     opacity: 0;
     pointer-events: none;
+
+    & > .space-before {
+      margin-inline-start: unset;
+      margin-block-start: 3em;
+    }
 
     &[aria-expanded="true"] {
       opacity: 1;
@@ -175,6 +191,14 @@ const NavItem = styled.li`
     color: var(--color);
     text-decoration: none;
 
+    & > img {
+      filter: invert(100%);
+    }
+
+    &:has(img)::after {
+      display: none !important;
+    }
+
     &.active {
       --color: var(--clr-accent-400);
     }
@@ -194,6 +218,10 @@ const NavItem = styled.li`
       opacity: 0;
 
       transition: transform 250ms ease-in-out, opacity 250ms ease-in-out;
+    }
+
+    &:has(img):hover {
+      scale: 1.1;
     }
 
     &:hover,
@@ -244,6 +272,37 @@ export const NavBar = ({ className, variant = "default" }: NavBarProps) => {
               Our Work
             </Link>
           </NavItem>
+
+          {/* TODO put these in the footer too */}
+          <div className="socials space-before">
+            <NavItem>
+              <a
+                href="https://www.instagram.com/blackrock.pictures/"
+                target="_blank"
+              >
+                <img
+                  src={instagramLogo}
+                  alt="Black Rock Pictures's Instagram"
+                  height="24"
+                  width="24"
+                />
+              </a>
+            </NavItem>
+
+            <NavItem>
+              <a
+                href="https://www.youtube.com/@blackrock.pictures"
+                target="_blank"
+              >
+                <img
+                  src={youtubeLogo}
+                  alt="Black Rock Pictures's YouTube"
+                  height="24"
+                  width="24"
+                />
+              </a>
+            </NavItem>
+          </div>
         </NavList>
       </Nav>
 
