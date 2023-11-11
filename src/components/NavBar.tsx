@@ -169,8 +169,40 @@ const NavItem = styled.li`
   letter-spacing: -0.1ch;
 
   & > a {
-    color: inherit;
+    --color: var(--clr-fill-400);
+
+    position: relative;
+    color: var(--color);
     text-decoration: none;
+
+    &.active {
+      --color: var(--clr-accent-400);
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+
+      width: 100%;
+      height: 0.25ch;
+      left: 0;
+      bottom: -0.25ch;
+
+      background-color: var(--color);
+
+      transform: translateY(-100%);
+      opacity: 0;
+
+      transition: transform 250ms ease-in-out, opacity 250ms ease-in-out;
+    }
+
+    &:hover,
+    &:focus-visible {
+      &::after {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
   }
 `;
 
@@ -196,25 +228,19 @@ export const NavBar = ({ className, variant = "default" }: NavBarProps) => {
 
         <NavList aria-expanded={isNavExpanded}>
           <NavItem>
-            <Link activeStyle={{ color: "var(--clr-accent-400)" }} to="/">
+            <Link activeClassName="active" to="/">
               Home
             </Link>
           </NavItem>
 
           <NavItem>
-            <Link
-              activeStyle={{ color: "var(--clr-accent-400)" }}
-              to="/about-us"
-            >
+            <Link activeClassName="active" to="/about-us">
               About
             </Link>
           </NavItem>
 
           <NavItem>
-            <Link
-              activeStyle={{ color: "var(--clr-accent-400)" }}
-              to="/our-work"
-            >
+            <Link activeClassName="active" to="/our-work">
               Our Work
             </Link>
           </NavItem>
