@@ -124,6 +124,7 @@ const CTA = styled.a`
     }
   }
 
+  /* TODO refactor this, navbar-link hover effect into a CSS class */
   &::before {
     content: "";
     position: absolute;
@@ -196,6 +197,7 @@ const IndexPage: React.FC<PageProps> = () => {
             We create art that tells <Highlight>stories.</Highlight>
           </StyledHeading>
 
+          {/* TODO refactor buttons across the site */}
           <CTA className="subtle-button" href="#contact">
             My turn
           </CTA>
