@@ -11,4 +11,5 @@ export { default as youtubeLogo } from "./youtubeLogo.png";
 
 // @index('./*/index.ts', f => `export * from "${f.path}";`);
 export * from "./crew/index";
+export * from "./logos/index";
 // @endindex

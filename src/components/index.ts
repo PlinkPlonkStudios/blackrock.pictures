@@ -6,4 +6,5 @@ export * from "./Heading";
 export * from "./NavBar";
 export * from "./PageTemplate";
 export * from "./ReelHero";
+export * from "./TrustedBrandsSection";
 // @endindex

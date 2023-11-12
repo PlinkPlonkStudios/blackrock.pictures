@@ -2,7 +2,13 @@ import React, { useEffect, useState } from "react";
 import type { HeadFC, PageProps } from "gatsby";
 import styled from "styled-components";
 
-import { ContactForm, Heading, PageTemplate, ReelHero } from "../components";
+import {
+  ContactForm,
+  Heading,
+  PageTemplate,
+  ReelHero,
+  TrustedBrandsSection,
+} from "../components";
 
 const MainContent = styled.div`
   min-height: 120vh;
@@ -209,7 +215,7 @@ const IndexPage: React.FC<PageProps> = () => {
 
         <div className="sr-only" id="after-hero" />
 
-        {/* TODO testimonials / brands section */}
+        <TrustedBrandsSection />
 
         <ContactSection id="contact">
           <ContactCopy>
