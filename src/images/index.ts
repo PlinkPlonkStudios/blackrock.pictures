@@ -1,3 +1,5 @@
+// TODO optimize images for slow networks
+
 // @index('./*.*', (f, _) => `export { default as ${_.camelCase(f.name)} } from "${f.path}${f.ext}";`)
 export { default as favicon } from "./favicon.png";
 export { default as instagramLogo } from "./instagram-logo.png";

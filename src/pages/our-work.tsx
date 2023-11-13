@@ -83,7 +83,7 @@ const AboutUsPage: React.FC<PageProps> = () => {
         description={
           <p>
             Our passion projects, experimental narratives, and visionary
-            journeys that mirror our souls.
+            journeys that mirror our hivemind's collective soul.
           </p>
         }
       >
@@ -149,8 +149,26 @@ const AboutUsPage: React.FC<PageProps> = () => {
           </VideoContainer>
         </Grid>
       </WorkCategory>
-      <WorkCategory title="Collaborations" />
-      <WorkCategory title="Client Projects" />
+      <WorkCategory
+        title="Collaborations"
+        description={
+          <p>
+            Explore our cinematic collaborations. From compelling narratives to
+            breathtaking visuals, our diverse portfolio showcases storytelling
+            at its finest.
+          </p>
+        }
+      />
+      <WorkCategory
+        title="Client Projects"
+        description={
+          <p>
+            Elevate your brand with our cinematic touch. Collaborate with us for
+            new commercial endeavors—from captivating ads to bespoke branded
+            content, we bring your vision to life.
+          </p>
+        }
+      />
     </PageTemplate>
   );
 };
