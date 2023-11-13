@@ -91,6 +91,7 @@ const Highlight = styled.span`
   color: var(--clr-accent-400);
 `;
 
+// TODO refactor this out to be reusable?
 const ContactSection = styled.section`
   display: grid;
   justify-items: center;

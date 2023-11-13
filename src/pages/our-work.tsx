@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { HeadFC, PageProps } from "gatsby";
-import { Heading, PageTemplate } from "../components";
+import { ContactForm, Heading, PageTemplate } from "../components";
 import styled from "styled-components";
 import { WorkCategory } from "../components/our-work";
 
@@ -71,6 +71,43 @@ const VideoContainer = styled.div`
     width: 100%;
     height: 100%;
   }
+`;
+
+const ContactSection = styled.section`
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  gap: 2em;
+
+  margin-block: 24em;
+  padding-block: 6em;
+
+  @media screen and (min-width: 60rem) {
+    grid-template-columns: 1fr 2fr;
+  }
+`;
+
+// TODO refactor this to be reusable
+const CTA = styled.a`
+  /* TODO move this elsewhere */
+  margin-block: 1em;
+  /* TODO this should be on reusable one */
+  text-align: center;
+
+  display: inline-block;
+  padding: 1em 2em;
+
+  background-color: var(--clr-secondary-400);
+  color: var(--clr-fill-400);
+
+  /* TODO: should this be here? */
+  font-size: 1.5rem;
+
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: none;
+
+  border-radius: 1em;
 `;
 
 const AboutUsPage: React.FC<PageProps> = () => {
@@ -148,7 +185,10 @@ const AboutUsPage: React.FC<PageProps> = () => {
             />
           </VideoContainer>
         </Grid>
+
+        <CTA href="#contact">I like what I see</CTA>
       </WorkCategory>
+
       <WorkCategory
         title="Collaborations"
         description={
@@ -159,6 +199,7 @@ const AboutUsPage: React.FC<PageProps> = () => {
           </p>
         }
       />
+
       <WorkCategory
         title="Client Projects"
         description={
@@ -169,6 +210,18 @@ const AboutUsPage: React.FC<PageProps> = () => {
           </p>
         }
       />
+
+      <ContactSection id="contact">
+        <div>
+          <p>
+            Like what you see above? We can make it happen &mdash; for you. Drop
+            us a line and let's turn your vision into captivating visual
+            storytelling. We're here to bring your ideas to life!
+          </p>
+        </div>
+
+        <ContactForm />
+      </ContactSection>
     </PageTemplate>
   );
 };

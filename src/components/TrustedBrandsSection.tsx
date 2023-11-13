@@ -80,6 +80,7 @@ const CTASection = styled.div`
   gap: 1em;
 `;
 
+// TODO refactor this to be reusable
 const CTA = styled.a`
   display: inline-block;
   padding: 1em 2em;
