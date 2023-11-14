@@ -3,6 +3,7 @@ import type { HeadFC, PageProps } from "gatsby";
 import { ContactForm, Heading, PageTemplate } from "../components";
 import styled from "styled-components";
 import { WorkCategory } from "../components/our-work";
+import { Button } from "../components/Button";
 
 const HeadingWithPadding = styled(Heading)`
   margin-block-start: 1em;
@@ -114,6 +115,8 @@ const AboutUsPage: React.FC<PageProps> = () => {
   return (
     <PageTemplate>
       <HeadingWithPadding>Our Work</HeadingWithPadding>
+
+      <Button onClick={() => console.log("jai")}>jai</Button>
 
       <WorkCategory
         title="Independent Creative Work"
