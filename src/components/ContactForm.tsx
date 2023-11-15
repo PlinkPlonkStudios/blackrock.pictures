@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from "react";
 import styled from "styled-components";
 
+// TODO make this a full-screen-width element for small screens
 const PurpleCard = styled.article`
   --form-gap: 2em;
 
@@ -163,7 +164,7 @@ const isValidEmail = (email: string) => {
   return emailRegex.test(email);
 };
 
-export const ContactForm = () => {
+export const ContactForm = ({ className }: { className?: string }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [body, setBody] = useState("");
@@ -175,7 +176,7 @@ export const ContactForm = () => {
   );
 
   return (
-    <PurpleCard>
+    <PurpleCard className={className}>
       <h2>Let's make something.</h2>
 
       <form action="https://api.web3forms.com/submit" method="POST">

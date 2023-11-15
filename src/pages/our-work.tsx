@@ -116,7 +116,7 @@ const AboutUsPage: React.FC<PageProps> = () => {
     <PageTemplate>
       <HeadingWithPadding>Our Work</HeadingWithPadding>
 
-      <Button onClick={() => console.log("jai")}>jai</Button>
+      {/* <Button onClick={() => console.log("jai")}>jai</Button> */}
 
       <WorkCategory
         title="Independent Creative Work"

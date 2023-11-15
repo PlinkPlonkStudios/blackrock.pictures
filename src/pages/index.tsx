@@ -96,13 +96,33 @@ const ContactSection = styled.section`
   display: grid;
   justify-items: center;
   align-items: center;
-  gap: 2em;
+  gap: 4em;
 
   margin-block: 24em;
   padding-block: 6em;
 
+  & > .contact-form {
+    grid-area: cf;
+  }
+
+  & > .p1 {
+    grid-area: p1;
+  }
+
+  & > .p2 {
+    grid-area: p2;
+  }
+
+  & > .p3 {
+    grid-area: p3;
+  }
+
+  grid-template-areas: "p1" "cf" "p2" "p3";
+
   @media screen and (min-width: 60rem) {
     grid-template-columns: 1fr 2fr;
+
+    grid-template-areas: "p1 cf" "p2 cf" "p3 cf";
   }
 `;
 
@@ -149,11 +169,7 @@ const CTA = styled.a`
   }
 `;
 
-const ContactCopy = styled.aside`
-  & > p {
-    margin-block-end: 2em;
-  }
-`;
+const ContactCopy = styled.div``;
 
 const DownArrow = styled.button`
   position: absolute;
@@ -219,7 +235,7 @@ const IndexPage: React.FC<PageProps> = () => {
         <TrustedBrandsSection />
 
         <ContactSection id="contact">
-          <ContactCopy>
+          <ContactCopy className="p1">
             <h3>Connect with Us for Your Film</h3>
             <p>
               We at Black Rock Pictures are more than just a film production
@@ -229,7 +245,9 @@ const IndexPage: React.FC<PageProps> = () => {
               mission is to create memorable stories that resonate with
               audiences worldwide.
             </p>
+          </ContactCopy>
 
+          <ContactCopy className="p2">
             <h3>How to Get in Touch</h3>
             <p>
               Have a project in mind or want to discuss potential
@@ -239,7 +257,9 @@ const IndexPage: React.FC<PageProps> = () => {
               about our services. Feel free to let us know what you have in
               mind, and we'll get back to you promptly.
             </p>
+          </ContactCopy>
 
+          <ContactCopy className="p3">
             <h3>Your Journey Starts Here</h3>
             <p>
               Your next film adventure begins with a simple message. Whether
@@ -250,7 +270,7 @@ const IndexPage: React.FC<PageProps> = () => {
             </p>
           </ContactCopy>
 
-          <ContactForm />
+          <ContactForm className="contact-form" />
         </ContactSection>
       </MainContent>
     </PageTemplate>
