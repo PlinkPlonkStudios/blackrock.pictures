@@ -40,6 +40,48 @@ const MainWithSpacingDueToNavBarAndDecal = styled.main`
   &.push-to-top {
     margin-block-start: 0;
   }
+
+  /*
+  .content-grid {
+    // Parameters: Only change these
+    --padding-inline: 1rem;
+    --content-max-width: 70ch;
+    --breakout-max-width: 90ch;
+
+    // Calculated: Don't change here or below
+    --gutter-size: minmax(var(--padding-inline), 1fr)
+    --breakout-size: minmax(0, calc(
+      (var(--breakout-max-width) - var(--content-max-width)) / 2
+    ));
+    --content-size: min(var(--content-max-width), 100% - (2 * var(--gutter-size)));
+    
+    display: grid;
+    grid-template-columns:
+      [full-width-start]
+        var(--gutter-size)
+        [breakout-start]
+          var(--breakout-size)
+          [content-start]
+            var(--content-size)
+          [content-end]
+          var(--breakout-size)
+        [breakout-end]
+        var(--gutter-size)
+      [full-width-end];
+  }
+
+  .content-grid > :not(.breakout, .full-width) {
+    grid-column: content;
+  }
+
+  .content-grid > .breakout {
+    grid-column: breakout;
+  }
+
+  .content-grid > .full-width {
+    grid-column: full-width;
+  }
+  */
 `;
 
 export const PageTemplate = ({
@@ -52,7 +94,7 @@ export const PageTemplate = ({
       <NavBar className="nav-bar" {...navBar} />
 
       <MainWithSpacingDueToNavBarAndDecal
-        className={pushToTop ? "push-to-top" : undefined}
+        className={`${pushToTop ? "push-to-top" : undefined} content-grid`}
       >
         {children}
       </MainWithSpacingDueToNavBarAndDecal>
