@@ -12,7 +12,7 @@ import {
 
 const MainContent = styled.div`
   min-height: 120vh;
-  min-height: 120dvh;
+  min-height: 120svh;
 
   padding-block-start: 6em;
 
@@ -66,7 +66,7 @@ const HeroSection = styled.header`
   gap: 2em;
 
   min-height: 90vh;
-  min-height: 90dvh;
+  min-height: 90svh;
 
   padding-block: 10em;
 
@@ -229,8 +229,6 @@ const IndexPage: React.FC<PageProps> = () => {
             <i className="fa-solid fa-arrow-down" />
           </DownArrow>
         </HeroSection>
-
-        <div className="sr-only" id="after-hero" />
 
         <TrustedBrandsSection />
 

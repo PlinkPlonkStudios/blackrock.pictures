@@ -14,7 +14,7 @@ export interface PageTemplateProps {
 
 const MainLayout = styled.div`
   min-height: 100vh;
-  min-height: 100dvh;
+  min-height: 100lvh;
 
   display: grid;
   grid-template-rows: 1fr min-content;
@@ -31,7 +31,7 @@ const MainWithSpacingDueToNavBarAndDecal = styled.main`
   margin-block: ${navBarHeight};
   padding-inline: clamp(1em, 5vw, 10%);
   min-height: 100vh;
-  min-height: 100dvh;
+  min-height: 100svh;
 
   @media screen and (min-width: 35rem) {
     padding-inline: clamp(1em, 15vw, 25%);

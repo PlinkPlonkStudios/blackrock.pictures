@@ -9,8 +9,8 @@ const VideoContainer = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  height: 100dvh;
   height: 100vh;
+  height: 100svh;
   z-index: -1;
   overflow: hidden;
 `;
@@ -22,7 +22,7 @@ const Video = styled.video`
   object-fit: cover;
 `;
 
-const Shadow = styled.div`
+const ShadowTop = styled.div`
   --top-color: transparent;
   --bottom-color: var(--clr-stroke-400);
 
@@ -42,7 +42,7 @@ const Shadow = styled.div`
 export const ReelHero = () => {
   return (
     <VideoContainer>
-      <Shadow />
+      <ShadowTop />
       <Video autoPlay loop muted playsInline>
         <source src={reelPlaceholder} type="video/mp4" />
       </Video>
