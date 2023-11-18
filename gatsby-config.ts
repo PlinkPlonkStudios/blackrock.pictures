@@ -1,9 +1,11 @@
 import type { GatsbyConfig } from "gatsby";
 
+const siteUrl = "https://blackrock.pictures";
+
 const config: GatsbyConfig = {
   siteMetadata: {
     title: `black rock pictures.`,
-    siteUrl: `https://blackrock.pictures`,
+    siteUrl,
   },
   trailingSlash: "never",
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
@@ -19,7 +21,12 @@ const config: GatsbyConfig = {
     //   },
     // },
     "gatsby-plugin-image",
-    "gatsby-plugin-sitemap",
+    {
+      resolve: "gatsby-plugin-sitemap",
+      options: {
+        resolveSiteUrl: () => siteUrl,
+      },
+    },
     {
       resolve: "gatsby-plugin-manifest",
       options: {
