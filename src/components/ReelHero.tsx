@@ -39,9 +39,13 @@ const ShadowTop = styled.div`
   }
 `;
 
-export const ReelHero = () => {
+interface ReelHeroProps {
+  className?: string;
+}
+
+export const ReelHero = ({ className }: ReelHeroProps) => {
   return (
-    <VideoContainer>
+    <VideoContainer className={className}>
       <ShadowTop />
       <Video autoPlay loop muted playsInline>
         <source src={reelPlaceholder} type="video/mp4" />

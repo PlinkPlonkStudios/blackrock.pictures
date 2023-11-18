@@ -1,0 +1,100 @@
+.flow > * + * {
+  margin-top: 1em;
+}
+
+.flow-2 > * + * {
+  margin-top: 2em;
+}
+
+.page-flow > * + * {
+  margin-block: 6em;
+}
+
+.page-flow-small > * + * {
+  margin-block: 3em;
+}
+
+.content-grid {
+  /* Parameters: Only change these */
+  --padding-inline: 1rem;
+  --content-max-width: 90ch;
+  --breakout-max-width: 110ch;
+
+  /* Calculated: Don't change here or below */
+  --gutter-size: minmax(var(--padding-inline), 1fr);
+  --breakout-size: minmax(
+    0,
+    calc((var(--breakout-max-width) - var(--content-max-width)) / 2)
+  );
+  --content-size: min(
+    var(--content-max-width),
+    100% - (2 * var(--padding-inline))
+  );
+
+  align-items: start;
+
+  display: grid;
+  grid-template-columns:
+    [full-width-start]
+    var(--gutter-size)
+    [breakout-start]
+    var(--breakout-size)
+    [content-start]
+    var(--content-size)
+    [content-end]
+    var(--breakout-size)
+    [breakout-end]
+    var(--gutter-size)
+    [full-width-end];
+}
+
+.content-grid > :not(.breakout, .full-width) {
+  grid-column: content;
+}
+
+.content-grid > .breakout {
+  grid-column: breakout;
+}
+
+.content-grid > .full-width {
+  grid-column: full-width;
+}
+
+.subtle-button {
+  --hidden-color: hsla(0, 0%, 0%, 20%);
+  --visible-color-hsl: var(--clr-secondary-400-hsl);
+
+  color: var(--clr-fill-400);
+  border-color: transparent;
+  border-radius: 1em;
+  box-shadow: 0px 0px 2em 2em var(--hidden-color);
+  cursor: pointer;
+
+  background-color: var(--hidden-color);
+
+  transition: background-color 150ms ease-out;
+
+  &:hover,
+  &:focus {
+    background-color: hsl(var(--visible-color-hsl));
+
+    &::after {
+      opacity: 1;
+    }
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    transition: transform 150ms ease-out, opacity 100ms ease-out;
+  }
+
+  &::after {
+    inset: 0;
+    box-shadow: 0px 0px 1em 1em hsla(var(--visible-color-hsl), 30%);
+    border-radius: inherit;
+    z-index: 99;
+
+    opacity: 0;
+  }
+}

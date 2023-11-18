@@ -10,52 +10,6 @@ import {
   TrustedBrandsSection,
 } from "../components";
 
-const MainContent = styled.div`
-  min-height: 120vh;
-  min-height: 120svh;
-
-  padding-block-start: 6em;
-
-  & .subtle-button {
-    --hidden-color: hsla(0, 0%, 0%, 20%);
-    --visible-color-hsl: var(--clr-secondary-400-hsl);
-
-    color: var(--clr-fill-400);
-    border-color: transparent;
-    border-radius: 1em;
-    box-shadow: 0px 0px 2em 2em var(--hidden-color);
-    cursor: pointer;
-
-    background-color: var(--hidden-color);
-
-    transition: background-color 150ms ease-out;
-
-    &:hover,
-    &:focus {
-      background-color: hsl(var(--visible-color-hsl));
-
-      &::after {
-        opacity: 1;
-      }
-    }
-
-    &::after {
-      content: "";
-      position: absolute;
-      transition: transform 150ms ease-out, opacity 100ms ease-out;
-    }
-
-    &::after {
-      inset: 0;
-      box-shadow: 0px 0px 1em 1em hsla(var(--visible-color-hsl), 30%);
-      border-radius: inherit;
-      z-index: 99;
-
-      opacity: 0;
-    }
-  }
-`;
-
 const HeroSection = styled.header`
   position: relative;
   isolation: isolate;
@@ -89,41 +43,6 @@ const StyledHeading = styled(Heading)`
 
 const Highlight = styled.span`
   color: var(--clr-accent-400);
-`;
-
-// TODO refactor this out to be reusable?
-const ContactSection = styled.section`
-  display: grid;
-  justify-items: center;
-  align-items: center;
-  gap: 4em;
-
-  margin-block: 24em;
-  padding-block: 6em;
-
-  & > .contact-form {
-    grid-area: cf;
-  }
-
-  & > .p1 {
-    grid-area: p1;
-  }
-
-  & > .p2 {
-    grid-area: p2;
-  }
-
-  & > .p3 {
-    grid-area: p3;
-  }
-
-  grid-template-areas: "p1" "cf" "p2" "p3";
-
-  @media screen and (min-width: 60rem) {
-    grid-template-columns: 1fr 2fr;
-
-    grid-template-areas: "p1 cf" "p2 cf" "p3 cf";
-  }
 `;
 
 const CTA = styled.a`
@@ -169,8 +88,6 @@ const CTA = styled.a`
   }
 `;
 
-const ContactCopy = styled.div``;
-
 const DownArrow = styled.button`
   position: absolute;
 
@@ -210,67 +127,57 @@ const IndexPage: React.FC<PageProps> = () => {
   }, []);
 
   return (
-    <PageTemplate pushToTop navBar={{ variant: navBarVariant }}>
-      <MainContent>
-        <ReelHero />
+    <PageTemplate
+      pushToTop
+      navBar={{ variant: navBarVariant }}
+      className="page-flow"
+    >
+      {/* TODO split this out into its own component? */}
+      <ReelHero className="full-width" />
+      <HeroSection className="breakout">
+        <StyledHeading>
+          We create art that tells <Highlight>stories.</Highlight>
+        </StyledHeading>
 
-        {/* TODO split this out into its own component? */}
-        <HeroSection>
-          <StyledHeading>
-            We create art that tells <Highlight>stories.</Highlight>
-          </StyledHeading>
+        {/* TODO refactor buttons across the site */}
+        <CTA className="subtle-button" href="#contact">
+          My turn
+        </CTA>
 
-          {/* TODO refactor buttons across the site */}
-          <CTA className="subtle-button" href="#contact">
-            My turn
-          </CTA>
+        <DownArrow className="subtle-button" onClick={scrollDown}>
+          <i className="fa-solid fa-arrow-down" />
+        </DownArrow>
+      </HeroSection>
 
-          <DownArrow className="subtle-button" onClick={scrollDown}>
-            <i className="fa-solid fa-arrow-down" />
-          </DownArrow>
-        </HeroSection>
+      <TrustedBrandsSection className="breakout" id="after-hero" />
 
-        <TrustedBrandsSection />
+      {/* TODO make the vertical spacing smaller here */}
+      <ContactForm className="contact-form">
+        <div>
+          <h3>Connect with Us for Your Film</h3>
+          <p>
+            We at Black Rock Pictures are more than just a film production
+            company; we're your creative partners in storytelling. Whether
+            you're a seasoned filmmaker or just starting, our doors are open to
+            collaborate and turn your cinematic dreams into reality. Our mission
+            is to create memorable stories that resonate with audiences
+            worldwide.
+          </p>
+        </div>
 
-        <ContactSection id="contact">
-          <ContactCopy className="p1">
-            <h3>Connect with Us for Your Film</h3>
-            <p>
-              We at Black Rock Pictures are more than just a film production
-              company; we're your creative partners in storytelling. Whether
-              you're a seasoned filmmaker or just starting, our doors are open
-              to collaborate and turn your cinematic dreams into reality. Our
-              mission is to create memorable stories that resonate with
-              audiences worldwide.
-            </p>
-          </ContactCopy>
-
-          <ContactCopy className="p2">
-            <h3>How to Get in Touch</h3>
-            <p>
-              Have a project in mind or want to discuss potential
-              collaborations? The first step is reaching out to us. Use the
-              contact form here to send us a message. We're eager to hear your
-              ideas, answer your questions, or provide you with more information
-              about our services. Feel free to let us know what you have in
-              mind, and we'll get back to you promptly.
-            </p>
-          </ContactCopy>
-
-          <ContactCopy className="p3">
-            <h3>Your Journey Starts Here</h3>
-            <p>
-              Your next film adventure begins with a simple message. Whether
-              it's a script you want to discuss, a project proposal, or you're
-              seeking advice on your filmmaking career, we're here to help.
-              We're excited to embark on this creative journey with you. Let's
-              create exceptional cinematic experiences &mdash; together.
-            </p>
-          </ContactCopy>
-
-          <ContactForm className="contact-form" />
-        </ContactSection>
-      </MainContent>
+        <div>
+          <h3>How to Get in Touch</h3>
+          <p>
+            Embark on your next film adventure with a simple message. Whether
+            you have a script to discuss, a project proposal, or seek advice on
+            your filmmaking career, we're here to help. Reach out through the
+            contact form to share your ideas, ask questions, or learn more about
+            our services. We're eager to collaborate and create exceptional
+            cinematic experiences together, so drop us a line, and we'll get
+            back to you promptly.
+          </p>
+        </div>
+      </ContactForm>
     </PageTemplate>
   );
 };

@@ -2,6 +2,7 @@ import * as React from "react";
 import { Link, type HeadFC, type PageProps, navigate } from "gatsby";
 import { Heading, PageTemplate } from "../components";
 import styled from "styled-components";
+import { Button } from "../components/Button";
 
 const HeadingWithPadding = styled(Heading)`
   margin-block-start: 1em;
@@ -9,10 +10,13 @@ const HeadingWithPadding = styled(Heading)`
   margin-block-end: 1em;
 `;
 
-const GoBackButton = styled.button`
+const GoBackButton = styled(Button)`
   display: flex;
   gap: 1em;
   align-items: center;
+
+  align-self: start;
+  justify-self: start;
 
   margin-block: 2em;
   padding: 1em 2em;
@@ -35,6 +39,7 @@ const ThanksPage: React.FC<PageProps> = () => {
 
       <p>Thanks for reaching out! We'll get back to you shortly.</p>
 
+      {/* TODO put this on the 404 page too */}
       <GoBackButton onClick={() => navigate(-1)}>
         <i className="fa-solid fa-arrow-left" />
         <span>Back</span>

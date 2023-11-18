@@ -49,7 +49,7 @@ const AboutUsPage: React.FC<PageProps> = () => {
     <PageTemplate>
       <HeadingWithPadding>About the Crew</HeadingWithPadding>
 
-      <CrewList>
+      <CrewList className="breakout">
         {crew.map((dude, index) => (
           <li>
             <AboutCrewMember crewMember={dude} even={index % 2 === 0} />

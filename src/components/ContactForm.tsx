@@ -1,20 +1,23 @@
-import React, { useMemo, useState } from "react";
+import React, { PropsWithChildren, useMemo, useState } from "react";
 import styled from "styled-components";
+import classNames from "classnames";
+
+import { navBarHeight } from "./NavBar";
 
 // TODO make this a full-screen-width element for small screens
-const PurpleCard = styled.article`
-  --form-gap: 2em;
+const FullWidthSection = styled.section`
+  --form-gap: 3em;
 
   display: grid;
   gap: var(--form-gap);
+  grid-template-columns: 2fr 3fr;
 
-  width: min(100%, 40rem);
-
-  padding: clamp(2em, 5vw, 3em) clamp(1em, 5vw, 3em);
+  padding: 5em clamp(1em, 5vw, 8em);
 
   background-color: var(--clr-secondary-400);
   color: var(--clr-fill-400);
-  border-radius: 2em;
+
+  scroll-margin-block-start: ${navBarHeight};
 
   & a {
     color: inherit;
@@ -25,20 +28,14 @@ const PurpleCard = styled.article`
     font-weight: bold;
     font-size: clamp(2rem, 5vw, 3rem);
     text-align: center;
+
+    grid-column: 1 / -1;
   }
 
   & > form {
     display: grid;
     gap: 1em;
     grid-template-columns: 1fr;
-
-    @media screen and (max-width: 40em) {
-      justify-items: center;
-
-      label {
-        width: 100%;
-      }
-    }
   }
 
   & input,
@@ -52,6 +49,21 @@ const PurpleCard = styled.article`
   & input[type="checkbox"] {
     width: unset;
     margin: 1em;
+  }
+
+  & h3 {
+    margin-block: 2em 1em;
+  }
+
+  @media screen and (max-width: 40em) {
+    grid-template-columns: 1fr;
+    & > form {
+      justify-items: center;
+
+      label {
+        width: 100%;
+      }
+    }
   }
 `;
 
@@ -164,7 +176,16 @@ const isValidEmail = (email: string) => {
   return emailRegex.test(email);
 };
 
-export const ContactForm = ({ className }: { className?: string }) => {
+interface ContactFormProps {
+  className?: string;
+  title?: React.ReactNode;
+}
+
+export const ContactForm = ({
+  className,
+  title,
+  children,
+}: PropsWithChildren<ContactFormProps>) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [body, setBody] = useState("");
@@ -176,8 +197,13 @@ export const ContactForm = ({ className }: { className?: string }) => {
   );
 
   return (
-    <PurpleCard className={className}>
-      <h2>Let's make something.</h2>
+    <FullWidthSection
+      className={classNames("full-width", className)}
+      id="contact"
+    >
+      <h2 className="breakout">{title ?? "Let's make something."}</h2>
+
+      <div className="flow-2">{children}</div>
 
       <form action="https://api.web3forms.com/submit" method="POST">
         <input
@@ -246,6 +272,6 @@ export const ContactForm = ({ className }: { className?: string }) => {
           </SubmitButton>
         </footer>
       </form>
-    </PurpleCard>
+    </FullWidthSection>
   );
 };

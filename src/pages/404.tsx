@@ -95,14 +95,12 @@ const NotFoundPage: React.FC<PageProps> = () => {
       <MainContent>
         <Header>
           <Heading>404: Page not found.</Heading>
-
-          <p>Weird.</p>
         </Header>
 
         <SuggestionsSection>
           <header>
             <p>
-              <em>...maybe you meant one of these?</em>
+              Weird. <em>...maybe you meant one of these?</em>
             </p>
           </header>
 

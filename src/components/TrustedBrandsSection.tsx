@@ -1,12 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 import { logos } from "../images";
+import { navBarHeight } from "./NavBar";
 
-interface TrustedBrandsSectionProps {}
+interface TrustedBrandsSectionProps {
+  className?: string;
+  id?: string;
+}
 
 const Section = styled.section`
   display: grid;
-  gap: 4em;
+  gap: 3em;
   grid-template-areas:
     "heading heading"
     "brands p1"
@@ -18,6 +22,8 @@ const Section = styled.section`
 
   /* TODO standardize page/section spacing */
   margin-block: 8em;
+
+  scroll-margin-block-start: calc(${navBarHeight} + 2rem);
 
   & > h2 {
     grid-column: 1 / -1;
@@ -95,9 +101,13 @@ const CTA = styled.a`
   border-radius: 1em;
 `;
 
-export const TrustedBrandsSection = ({}: TrustedBrandsSectionProps) => {
+export const TrustedBrandsSection = ({
+  // TODO this is a lil janky but i need it for the home screen scrolling button
+  id,
+  className,
+}: TrustedBrandsSectionProps) => {
   return (
-    <Section>
+    <Section className={className} id={id}>
       <SectionHeading>We've Been Around the Block.</SectionHeading>
 
       <BrandsGrid>

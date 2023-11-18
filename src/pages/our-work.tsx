@@ -74,20 +74,6 @@ const VideoContainer = styled.div`
   }
 `;
 
-const ContactSection = styled.section`
-  display: grid;
-  justify-items: center;
-  align-items: center;
-  gap: 2em;
-
-  margin-block: 24em;
-  padding-block: 6em;
-
-  @media screen and (min-width: 60rem) {
-    grid-template-columns: 1fr 2fr;
-  }
-`;
-
 // TODO refactor this to be reusable
 const CTA = styled.a`
   /* TODO move this elsewhere */
@@ -113,12 +99,11 @@ const CTA = styled.a`
 
 const AboutUsPage: React.FC<PageProps> = () => {
   return (
-    <PageTemplate>
+    <PageTemplate className="page-flow-small">
       <HeadingWithPadding>Our Work</HeadingWithPadding>
 
-      {/* <Button onClick={() => console.log("jai")}>jai</Button> */}
-
       <WorkCategory
+        className="full-width content-grid"
         title="Independent Creative Work"
         description={
           <p>
@@ -127,7 +112,7 @@ const AboutUsPage: React.FC<PageProps> = () => {
           </p>
         }
       >
-        <Grid>
+        <Grid className="breakout">
           <VideoContainer>
             <iframe
               src="https://www.youtube-nocookie.com/embed/NPHRn5Ix_oo?si=8YsDEJaPsDpwTKzF"
@@ -189,7 +174,9 @@ const AboutUsPage: React.FC<PageProps> = () => {
           </VideoContainer>
         </Grid>
 
-        <CTA href="#contact">I like what I see</CTA>
+        <CTA href="#contact" className="breakout">
+          I like what I see
+        </CTA>
       </WorkCategory>
 
       <WorkCategory
@@ -214,17 +201,28 @@ const AboutUsPage: React.FC<PageProps> = () => {
         }
       />
 
-      <ContactSection id="contact">
+      {/* TODO nested content-grid with this isn't working properly on mobile */}
+      {/* eg .content-grid > .full-width.content-grid has x-overflow */}
+      <ContactForm className="full-width" title={"We Want to Hear from You."}>
+        <p>
+          Like what you see above? We can make it happen &mdash; for you. Drop
+          us a line and let's turn your vision into captivating visual
+          storytelling. We're here to bring your ideas to life!
+        </p>
+
         <div>
+          <h3>Let's Create Together</h3>
           <p>
-            Like what you see above? We can make it happen &mdash; for you. Drop
-            us a line and let's turn your vision into captivating visual
-            storytelling. We're here to bring your ideas to life!
+            Embark on your next film adventure with a simple message. Whether
+            you have a script to discuss, a project proposal, or seek advice on
+            your filmmaking career, we're here to help. Reach out through the
+            contact form to share your ideas, ask questions, or learn more about
+            our services. We're eager to collaborate and create exceptional
+            cinematic experiences together, so drop us a line, and we'll get
+            back to you promptly.
           </p>
         </div>
-
-        <ContactForm />
-      </ContactSection>
+      </ContactForm>
     </PageTemplate>
   );
 };
