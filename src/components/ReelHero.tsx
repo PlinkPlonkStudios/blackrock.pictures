@@ -10,7 +10,7 @@ const VideoContainer = styled.div`
   left: 0;
   width: 100%;
   height: 100vh;
-  height: 100svh;
+  height: 100lvh;
   z-index: -1;
   overflow: hidden;
 `;

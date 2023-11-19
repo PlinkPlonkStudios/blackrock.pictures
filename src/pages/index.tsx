@@ -19,8 +19,8 @@ const HeroSection = styled.header`
   justify-content: flex-end;
   gap: 2em;
 
-  min-height: 90vh;
-  min-height: 90svh;
+  min-height: 100vh;
+  min-height: 100lvh;
 
   padding-block: 10em;
 
