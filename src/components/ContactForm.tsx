@@ -102,7 +102,7 @@ const SubmitButton = styled.button`
   text-transform: uppercase;
 
   border-style: solid;
-  border-radius: 0 0 1rem 1rem;
+  border-radius: 0 0 0.25em 0.25em;
 
   cursor: pointer;
 
@@ -114,8 +114,8 @@ const SubmitButton = styled.button`
 
   font-weight: bold;
 
-  transition: color 250ms ease-in-out, color 250ms ease-in-out,
-    border-color 250ms ease-in-out, scale 100ms ease-in-out;
+  transition: color 250ms ease-in-out 150ms, border-color 250ms ease-in-out,
+    scale 100ms ease-in-out;
 
   &:hover,
   &:focus-visible {
@@ -138,6 +138,7 @@ const SubmitButton = styled.button`
     height: 1em;
 
     background-color: inherit;
+    border-radius: 0.25em 0.25em 0 0;
 
     transform: rotate(-20deg);
     transform-origin: bottom left;
