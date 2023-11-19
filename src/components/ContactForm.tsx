@@ -1,10 +1,11 @@
 import React, { PropsWithChildren, useMemo, useState } from "react";
 import styled from "styled-components";
 import classNames from "classnames";
+import { useForm } from "react-hook-form";
 
 import { navBarHeight } from "./NavBar";
+import { navigate } from "gatsby";
 
-// TODO make this a full-screen-width element for small screens
 const FullWidthSection = styled.section`
   --form-gap: 3em;
 
@@ -36,6 +37,17 @@ const FullWidthSection = styled.section`
     display: grid;
     gap: 1em;
     grid-template-columns: 1fr;
+
+    & footer {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: start;
+      align-items: center;
+
+      gap: 2em;
+
+      isolation: isolate;
+    }
   }
 
   & input,
@@ -49,6 +61,12 @@ const FullWidthSection = styled.section`
   & input[type="checkbox"] {
     width: unset;
     margin: 1em;
+    z-index: 1;
+    /* TODO get this to go under the slate top */
+  }
+
+  label#newsletter {
+    border: 2px solid red;
   }
 
   & h3 {
@@ -63,10 +81,18 @@ const FullWidthSection = styled.section`
       label {
         width: 100%;
       }
+
+      footer {
+        flex-direction: column;
+      }
     }
   }
 `;
 
+// TODO slate top background-image
+// TODO slate bottom background-image
+// TODO slate should be behind everything until hovered on
+// TODO required fields
 const SubmitButton = styled.button`
   position: relative;
   isolation: isolate;
@@ -76,105 +102,57 @@ const SubmitButton = styled.button`
   text-transform: uppercase;
 
   border-style: solid;
-  border-radius: 1rem;
+  border-radius: 0 0 1rem 1rem;
 
   cursor: pointer;
 
-  color: var(--clr-secondary-400);
-  background-color: var(--clr-accent-400);
+  color: var(--clr-fill-400);
+  background-color: var(--clr-stroke-400);
+
+  border-width: 0;
   border-color: transparent;
 
-  transition: color 250ms ease-in-out, background-color 250ms ease-in-out,
+  font-weight: bold;
+
+  transition: color 250ms ease-in-out, color 250ms ease-in-out,
     border-color 250ms ease-in-out, scale 100ms ease-in-out;
-
-  &[disabled] {
-    color: hsla(var(--clr-fill-hsl), 20%);
-    background-color: var(--clr-secondary-400);
-    border-color: hsla(var(--clr-fill-hsl), 20%);
-
-    cursor: not-allowed;
-    pointer-events: visible;
-
-    &:hover {
-      /* ignore scale-up from below */
-      scale: 1;
-    }
-
-    &::after {
-      transform: var(--transform-hide);
-      opacity: 0;
-    }
-  }
 
   &:hover,
   &:focus-visible {
     scale: 1.05;
-  }
+    color: var(--clr-accent-400);
 
-  &:hover {
     &::after {
-      transform: var(--transform-hide);
-      opacity: 0;
-    }
-  }
-
-  @keyframes point {
-    from {
-      translate: -0.25em;
-    }
-
-    to {
-      translate: 0.25em;
+      transform: rotate(0deg);
     }
   }
 
   &::after {
-    --width: 3em;
-    --transform-y-align: translateY(-50%);
-    --transform-hide: translateX(-200%) var(--transform-y-align);
-
     content: "";
     position: absolute;
 
-    top: 50%;
-    transform: var(--transform-y-align);
-    right: calc(-1 * var(--width) - 1em);
+    top: -1em;
+    left: 0;
+
+    width: 100%;
+    height: 1em;
+
+    background-color: inherit;
+
+    transform: rotate(-20deg);
+    transform-origin: bottom left;
+
+    transition: transform 400ms;
+
+    transition-timing-function: cubic-bezier(1, -0.7, 1, 1.71);
+
     z-index: -1;
 
-    transition: transform 250ms ease-in-out, opacity 250ms ease-in-out;
-    animation-name: point;
-    animation-duration: 1s;
-    animation-direction: alternate;
-    animation-iteration-count: infinite;
-    animation-timing-function: ease-in-out;
-
-    width: var(--width);
-    aspect-ratio: 16 / 9;
-
-    background: var(--clr-fill-400);
-    clip-path: polygon(
-      40% 0%,
-      40% 20%,
-      100% 20%,
-      100% 80%,
-      40% 80%,
-      40% 100%,
-      0% 50%
-    );
-
-    pointer-events: none;
-
-    @media screen and (max-width: 40rem) {
-      display: none;
+    @media (prefers-reduced-motion) {
+      transform: unset !important;
     }
   }
 `;
-
-const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-const isValidEmail = (email: string) => {
-  return emailRegex.test(email);
-};
 
 interface ContactFormProps {
   className?: string;
@@ -186,15 +164,24 @@ export const ContactForm = ({
   title,
   children,
 }: PropsWithChildren<ContactFormProps>) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [body, setBody] = useState("");
-  const [newsletter, setNewsletter] = useState(true);
+  const { register, handleSubmit } = useForm();
 
-  const readyToSubmit = useMemo(
-    () => name.length > 0 && isValidEmail(email) && body.length > 0,
-    [name, email, body]
-  );
+  const onSubmit = async (data: any) => {
+    console.log(data);
+
+    await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      if (res.ok) {
+        // TODO instead, have loading states for the form and set loading to false here
+        return navigate("/thanks");
+      }
+    });
+  };
 
   return (
     <FullWidthSection
@@ -205,35 +192,33 @@ export const ContactForm = ({
 
       <div className="flow-2">{children}</div>
 
-      <form action="https://api.web3forms.com/submit" method="POST">
+      <form onSubmit={handleSubmit(onSubmit)} method="POST">
         <input
           type="hidden"
-          name="access_key"
           value="00005c50-546d-4cc5-856c-885884789a36"
+          {...register("access_key")}
         />
 
         <label htmlFor="name">
           <p>Your Name</p>
           <input
             id="name"
-            name="name"
             type="text"
             autoComplete="name"
             placeholder="Jane Doe"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            required
+            {...register("name")}
           />
         </label>
         <label htmlFor="email">
           <p>Your Email</p>
           <input
             id="subject"
-            name="email"
+            required
             type="email"
             autoComplete="email"
             placeholder="hello@plinkplonkstudios.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            {...register("email")}
           />
         </label>
 
@@ -241,37 +226,30 @@ export const ContactForm = ({
           <p>Your Story</p>
           <textarea
             id="body"
-            name="body"
+            required
             rows={6}
             placeholder="We are PlinkPlonk Studios. We are one."
-            value={body}
-            onChange={(e) => setBody(e.target.value)}
+            {...register("body")}
           />
         </label>
-
-        <label htmlFor="newsletter">
-          <input
-            type="checkbox"
-            name="newsletter"
-            id="newsletter"
-            checked={newsletter}
-            onChange={() => setNewsletter((prev) => !prev)}
-          />
-          Sign up for our newsletter
-        </label>
-
-        <input
-          type="hidden"
-          name="redirect"
-          value="https://shmois.com/thanks"
-        />
 
         <footer>
-          <SubmitButton type="submit" disabled={!readyToSubmit}>
+          <label htmlFor="newsletter">
+            <input
+              type="checkbox"
+              id="newsletter"
+              {...register("newsletter")}
+            />
+            Sign up for our newsletter
+          </label>
+
+          <SubmitButton type="submit" disabled={false}>
             Send it
           </SubmitButton>
         </footer>
       </form>
+
+      <script src="https://web3forms.com/client/script.js" async defer />
     </FullWidthSection>
   );
 };
