@@ -20,7 +20,7 @@ const HeroSection = styled.header`
   gap: 2em;
 
   min-height: 100vh;
-  min-height: 100lvh;
+  min-height: 100svh;
 
   padding-block: 10em;
 
