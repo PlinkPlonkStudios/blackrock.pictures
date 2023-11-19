@@ -98,3 +98,32 @@
     opacity: 0;
   }
 }
+
+:root {
+  --clr-scrollbar: var(--clr-stroke-400);
+  --clr-scrollbar-thumb: var(--clr-stroke-200);
+  --clr-scrollbar-track: var(--clr-stroke-400);
+
+  --clr-scrollbar-thumb-alt: var(--clr-stroke-100);
+}
+
+::-webkit-scrollbar {
+  width: 0.8rem;
+  background-color: var(--clr-scrollbar);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+  background-color: var(--clr-scrollbar-thumb);
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 9999px;
+  background-color: var(--clr-scrollbar-track);
+}
+
+::-webkit-scrollbar:hover,
+::-webkit-scrollbar-thumb:hover,
+::-webkit-scrollbar-track:hover {
+  --clr-scrollbar-thumb: var(--clr-scrollbar-thumb-alt);
+}
