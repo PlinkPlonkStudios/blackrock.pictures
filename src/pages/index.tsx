@@ -98,7 +98,13 @@ const DownArrow = styled.button`
 `;
 
 const FilmSection = styled.section`
+  /**
+   * Not a fan of using !important but I have to override the main rule that
+   * overrides this one without it
+   */
   grid-column: full-width-start / breakout-end !important;
+
+  position: relative;
 
   display: grid;
   grid-template-columns: 10fr 16fr;
@@ -115,6 +121,7 @@ const FilmSection = styled.section`
   }
 
   @media screen and (max-width: 95rem) {
+    /* Overriding the override above :/ */
     grid-column: content !important;
     grid-template-columns: 1fr;
     gap: 4rem;
@@ -124,7 +131,7 @@ const FilmSection = styled.section`
 `;
 
 const LogoText = styled.span`
-  font-family: EnglishTowne;
+  font-family: Seagram;
   font-size: 1.25em;
   color: #940202;
 `;
@@ -190,14 +197,10 @@ const IndexPage: React.FC<PageProps> = () => {
       <ReelHumanBean className="full-width" />
 
       <FilmSection id="after-hero">
-        <header>
-          <h2 className="text-contrast">
-            <LogoText>Saint Joseph.</LogoText> <br />
-            Watch it.
-          </h2>
-
-          <p>The font is a placeholder.</p>
-        </header>
+        <h2 className="text-contrast">
+          <LogoText>Saint Joseph.</LogoText> <br />
+          Watch it.
+        </h2>
 
         <VideoContainer>
           <iframe

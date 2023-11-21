@@ -3,9 +3,9 @@ import React from "react";
 export const onRenderBody = ({ setHeadComponents }) => {
   setHeadComponents([
     <link
-      key="english-towne"
+      key="seagram-tfb"
       rel="preload"
-      href="/fonts/EnglishTowne.ttf"
+      href="/fonts/Seagram TFB.ttf"
       as="font"
       type="font/ttf"
       crossOrigin="anonymous"
