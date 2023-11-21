@@ -8,6 +8,7 @@ import {
   PageTemplate,
   ReelHero,
   TrustedBrandsSection,
+  VideoContainer,
 } from "../components";
 
 const HeroSection = styled.header`
@@ -25,7 +26,7 @@ const HeroSection = styled.header`
   padding-block: 10em;
 
   @media screen and (max-width: 40rem) {
-    padding-block: 3em;
+    padding-block: 6em;
     justify-content: flex-start;
 
     & > h1 {
@@ -93,7 +94,45 @@ const DownArrow = styled.button`
 
   padding: 1em;
   right: 0;
-  bottom: 6em;
+  bottom: 12em;
+`;
+
+const FilmSection = styled.section`
+  grid-column: full-width-start / breakout-end !important;
+
+  display: grid;
+  grid-template-columns: 10fr 16fr;
+  align-items: center;
+  gap: 1rem;
+
+  padding-inline-start: 10em;
+
+  & h2 {
+    font-size: clamp(1em, 8vw, 4rem);
+
+    /* Constant with respect to font size up top for scroll button purposes */
+    margin-block: 6rem 0.25em;
+  }
+
+  @media screen and (max-width: 95rem) {
+    grid-column: content !important;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+
+    padding: unset;
+  }
+`;
+
+const LogoText = styled.span`
+  font-family: EnglishTowne;
+  font-size: 1.25em;
+  color: #940202;
+`;
+
+/* https://youtu.be/XoHI6Zus2UI */
+const ReelHumanBean = styled(ReelHero)`
+  /* not in the flow since it's position: absolute, so align it back to top */
+  margin-top: 0 !important;
 `;
 
 const IndexPage: React.FC<PageProps> = () => {
@@ -130,12 +169,11 @@ const IndexPage: React.FC<PageProps> = () => {
     <PageTemplate
       pushToTop
       navBar={{ variant: navBarVariant }}
-      className="page-flow"
+      className="page-flow-large"
     >
       {/* TODO split this out into its own component? */}
-      <ReelHero className="full-width" />
       <HeroSection className="breakout">
-        <StyledHeading>
+        <StyledHeading className="text-contrast">
           We create art that tells <Highlight>stories.</Highlight>
         </StyledHeading>
 
@@ -149,7 +187,30 @@ const IndexPage: React.FC<PageProps> = () => {
         </DownArrow>
       </HeroSection>
 
-      <TrustedBrandsSection className="breakout" id="after-hero" />
+      <ReelHumanBean className="full-width" />
+
+      <FilmSection id="after-hero">
+        <header>
+          <h2 className="text-contrast">
+            <LogoText>Saint Joseph.</LogoText> <br />
+            Watch it.
+          </h2>
+
+          <p>The font is a placeholder.</p>
+        </header>
+
+        <VideoContainer>
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/NPHRn5Ix_oo?si=8YsDEJaPsDpwTKzF"
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          />
+        </VideoContainer>
+      </FilmSection>
+
+      <TrustedBrandsSection className="" />
 
       {/* TODO make the vertical spacing smaller here */}
       <ContactForm className="contact-form">
