@@ -5,7 +5,7 @@ export const onRenderBody = ({ setHeadComponents }) => {
     <link
       key="seagram-tfb"
       rel="preload"
-      href="/fonts/Seagram TFB.ttf"
+      href="/fonts/Seagram tfb.ttf"
       as="font"
       type="font/ttf"
       crossOrigin="anonymous"
