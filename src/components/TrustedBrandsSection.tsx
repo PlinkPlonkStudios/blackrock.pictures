@@ -10,7 +10,7 @@ interface TrustedBrandsSectionProps {
 
 const Section = styled.section`
   display: grid;
-  gap: 3em;
+  grid-gap: 0em 5em;
   grid-template-areas:
     "heading heading"
     "brands p1"
@@ -27,6 +27,7 @@ const Section = styled.section`
 
   & > h2 {
     grid-column: 1 / -1;
+    margin-block: 2em;
   }
 
   & p {
@@ -53,7 +54,10 @@ const BrandsGrid = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 2em;
+  gap: 1em;
+
+  /* Really just for mobile */
+  margin-block: 2em;
 `;
 
 const BrandLogo = styled.img`
