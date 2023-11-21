@@ -92,7 +92,6 @@ const FullWidthSection = styled.section`
 // TODO slate top background-image
 // TODO slate bottom background-image
 // TODO slate should be behind everything until hovered on
-// TODO required fields
 const SubmitButton = styled.button`
   position: relative;
   isolation: isolate;
@@ -122,11 +121,13 @@ const SubmitButton = styled.button`
     scale: 1.05;
     color: var(--clr-accent-400);
 
+    /* Clap the slate */
     &::after {
       transform: rotate(0deg);
     }
   }
 
+  /* Slate top */
   &::after {
     content: "";
     position: absolute;
@@ -148,6 +149,7 @@ const SubmitButton = styled.button`
     transition-timing-function: cubic-bezier(1, -0.7, 1, 1.71);
 
     z-index: -1;
+    pointer-events: none;
 
     @media (prefers-reduced-motion) {
       transform: unset !important;
@@ -207,7 +209,6 @@ export const ContactForm = ({
             type="text"
             autoComplete="name"
             placeholder="Jane Doe"
-            required
             {...register("name")}
           />
         </label>
@@ -227,7 +228,6 @@ export const ContactForm = ({
           <p>Your Story</p>
           <textarea
             id="body"
-            required
             rows={6}
             placeholder="We are PlinkPlonk Studios. We are one."
             {...register("body")}
@@ -239,6 +239,7 @@ export const ContactForm = ({
             <input
               type="checkbox"
               id="newsletter"
+              defaultChecked
               {...register("newsletter")}
             />
             Sign up for our newsletter
