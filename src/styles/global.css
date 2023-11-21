@@ -1,17 +1,26 @@
 .flow > * + * {
-  margin-top: 1em;
+  --margin-top: 1em;
+  margin-top: var(--margin-top);
 }
 
 .flow-2 > * + * {
-  margin-top: 2em;
+  --margin-top: 2em;
+  margin-top: var(--margin-top);
 }
 
 .page-flow > * + * {
-  margin-block: 6em;
+  --margin-top: 6rem;
+  margin-top: var(--margin-top);
 }
 
 .page-flow-small > * + * {
-  margin-block: 3em;
+  margin-top: var(--margin-top);
+  --margin-top: 3rem;
+}
+
+.page-flow-large > * + * {
+  --margin-top: 12rem;
+  margin-top: var(--margin-top);
 }
 
 .content-grid {
@@ -97,6 +106,10 @@
 
     opacity: 0;
   }
+}
+
+.text-contrast {
+  text-shadow: -0.1ch 0.1ch 0.05ch hsla(var(--clr-stroke-400-hsl), 20%);
 }
 
 :root {
