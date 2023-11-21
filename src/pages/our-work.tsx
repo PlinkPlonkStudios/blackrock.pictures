@@ -1,9 +1,13 @@
 import * as React from "react";
 import type { HeadFC, PageProps } from "gatsby";
-import { ContactForm, Heading, PageTemplate } from "../components";
+import {
+  ContactForm,
+  Heading,
+  PageTemplate,
+  VideoContainer,
+} from "../components";
 import styled from "styled-components";
 import { WorkCategory } from "../components/our-work";
-import { Button } from "../components/Button";
 
 const HeadingWithPadding = styled(Heading)`
   margin-block-start: 1em;
@@ -64,13 +68,6 @@ const Grid = styled.div`
       aspect-ratio: var(--aspect-ratio);
       max-width: 100%;
     }
-  }
-`;
-
-const VideoContainer = styled.div`
-  & > iframe {
-    width: 100%;
-    height: 100%;
   }
 `;
 
