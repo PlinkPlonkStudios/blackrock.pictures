@@ -7,6 +7,7 @@ import { Footer } from "./Footer";
 import "../styles/resets.css";
 import "../styles/global.css";
 import "../styles/colors.css";
+import "../styles/fonts.css";
 
 export interface PageTemplateProps {
   children: React.ReactNode;
