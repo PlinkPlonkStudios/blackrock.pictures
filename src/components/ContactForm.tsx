@@ -34,6 +34,7 @@ const FullWidthSection = styled.section`
   }
 
   & > form {
+    isolation: isolate;
     display: grid;
     gap: 1em;
     grid-template-columns: 1fr;
@@ -45,8 +46,6 @@ const FullWidthSection = styled.section`
       align-items: center;
 
       gap: 2em;
-
-      isolation: isolate;
     }
   }
 
@@ -61,8 +60,6 @@ const FullWidthSection = styled.section`
   & input[type="checkbox"] {
     width: unset;
     margin: 1em;
-    z-index: 1;
-    /* TODO get this to go under the slate top */
   }
 
   label#newsletter {
@@ -93,8 +90,11 @@ const FullWidthSection = styled.section`
 // TODO slate bottom background-image
 // TODO slate should be behind everything until hovered on
 const SubmitButton = styled.button`
+  --clap-time: 400ms;
+  --recoil-time: 150ms;
+  --recoil-recover-time: 400ms;
+
   position: relative;
-  isolation: isolate;
 
   font-size: 2rem;
   padding: 0.5em 1.5em;
@@ -113,13 +113,18 @@ const SubmitButton = styled.button`
 
   font-weight: bold;
 
-  transition: color 250ms ease-in-out 150ms, border-color 250ms ease-in-out,
-    scale 100ms ease-in-out;
+  transition: color calc(var(--clap-time) - 150ms) ease-in-out 150ms,
+    scale 100ms ease-in-out,
+    transform var(--recoil-time) ease-in-out var(--clap-time),
+    rotate var(--recoil-recover-time) ease-in-out
+      calc(var(--clap-time) + var(--recoil-time));
 
   &:hover,
   &:focus-visible {
     scale: 1.05;
     color: var(--clr-accent-400);
+    rotate: -7deg;
+    transform: rotate(7deg);
 
     /* Clap the slate */
     &::after {
@@ -144,11 +149,11 @@ const SubmitButton = styled.button`
     transform: rotate(-20deg);
     transform-origin: bottom left;
 
-    transition: transform 400ms;
+    transition: transform var(--clap-time);
 
     transition-timing-function: cubic-bezier(1, -0.7, 1, 1.71);
 
-    z-index: -1;
+    z-index: -99;
     pointer-events: none;
 
     @media (prefers-reduced-motion) {
