@@ -88,7 +88,6 @@ const FullWidthSection = styled.section`
 
 // TODO slate top background-image
 // TODO slate bottom background-image
-// TODO slate should be behind everything until hovered on
 const SubmitButton = styled.button`
   --clap-time: 400ms;
   --recoil-time: 150ms;
