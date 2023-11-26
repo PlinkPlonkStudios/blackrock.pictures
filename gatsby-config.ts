@@ -50,6 +50,30 @@ const config: GatsbyConfig = {
       },
       __key: "images",
     },
+    {
+      resolve: "gatsby-plugin-google-gtag",
+      options: {
+        // You can add multiple tracking ids and a pageview event will be fired for all of them.
+        trackingIds: [
+          "G-53K913PV38", // shmois.com
+          // "G-3ZW708HPWK", // blackrock.pictures
+        ],
+        // This object gets passed directly to the gtag config command
+        // This config will be shared across all trackingIds
+        gtagConfig: {
+          optimize_id: "OPT_CONTAINER_ID",
+          anonymize_ip: true,
+          cookie_expires: 0,
+        },
+        // This object is used for configuration specific to this plugin
+        pluginConfig: {
+          // Setting this parameter is also optional
+          respectDNT: true,
+          // Delays processing pageview events on route update (in milliseconds)
+          delayOnRouteUpdate: 50,
+        },
+      },
+    },
   ],
 };
 
