@@ -34,7 +34,7 @@ export const crew: CrewMember[] = [
     imgSrc: crewImages.kenny,
     role: "Head of Sound",
     description:
-      "He embodies passion in sound, acting, and pre-production. With a keen ear for soundscapes, Kenny elevates the auditory dimension of our projects. His talent extends to acting, adding depth to on-screen narratives. In pre-production, Kenny plays a pivotal role in laying the groundwork for seamless storytelling. When lending his hand to editing, Kenny's multifaceted skills enrich our creative process, making him an invaluable asset in the world of cinematic collaboration.",
+      "He embodies passion in sound, acting, and pre-production. His talent extends to acting, adding depth to on-screen narratives. In pre-production, Kenny plays a pivotal role in laying the groundwork for seamless storytelling. When lending his hand to editing, Kenny's multifaceted skills enrich our creative process, making him an invaluable asset in the world of cinematic collaboration — both in the field, and on the court.",
   },
   {
     name: "Zach",
