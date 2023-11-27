@@ -1,6 +1,7 @@
 html {
   /* FILL */
   --clr-fill-400: #fff;
+  --clr-fill-600: #fffb;
   --clr-fill-hsl: 0, 0%, 100%;
 
   /* STROKE */

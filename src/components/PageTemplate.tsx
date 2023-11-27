@@ -24,10 +24,6 @@ const MainLayout = styled.div`
   grid-template-rows: 1fr min-content;
 
   overflow-x: hidden;
-
-  & > footer {
-    margin-top: auto;
-  }
 `;
 
 const MainWithSpacingDueToNavBarAndDecal = styled.main`
